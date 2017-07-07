@@ -1,0 +1,15 @@
+/*!
+	-----------------------------------------------------------------------------
+
+	7.0 - Revisar Pago
+
+	-----------------------------------------------------------------------------
+	*/
+.revisar-pago-wrap {
+  background-image: url(../images/background.png);
+  background-position: 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100%;
+}

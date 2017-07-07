@@ -1,0 +1,410 @@
+/*!
+	-----------------------------------------------------------------------------
+	
+	2.0 - Basicos
+			# Basic
+			# Utility
+			# Wrap
+			# Btn
+			# Footer
+			# Error
+	-----------------------------------------------------------------------------
+	*/
+
+/*  Basic
+	========================================================================== */
+*,
+*:after,
+*:before
+	box-sizing: border-box
+
+*
+	margin: 0
+	padding: 0
+
+body
+	background-color: $text-base
+	font:
+		family: 'nexaReg'
+		size: 16px
+		weight: 300
+	color: $text-base
+	overflow: hidden
+
+/* a */
+a
+	color: $link
+	font:
+		family: 'nexaReg'
+		size: 16px
+		weight: 400
+	text-decoration: none
+	+transition(all 0.3s ease-in)
+	&:hover
+		color: $link--
+		text-decoration: none
+		+transition(all 0.3s ease-out)
+
+/* img */
+img
+	+transition(all 0.5s ease-in)
+
+/* Utility
+   ========================== */
+/* h1 - h6 */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 
+	font:
+		family: 'nexaBook'
+		weight: 400
+	margin: 0
+	padding: 0
+h1,
+.h1
+	font-size: 2.8em
+h2,
+.h2
+	font-size: 2.4em
+h3,
+.h3
+	font-size: 2em
+h4,
+.h4
+	font-size: 1.6em
+h5,
+.h5
+	font-size: 1.4em
+h6,
+.h6
+	font-size: 1.2em
+/* p */
+p
+	margin-bottom: 0
+/* margin */
+.margin-0
+	margin: 0
+/* padding */
+.padding-0
+	padding: 0
+/* hr */
+hr
+	border: none
+	margin: 0
+
+/* Wrap
+   ========================== */
+.wrap
+	position: relative
+
+.wrap-bg
+	background-image: url(../images/background.png)
+	background-position: 50%
+	background-size: cover
+	background-repeat: no-repeat
+
+.screen
+	height: 100vh
+	overflow: hidden
+
+.screen-int
+	height: 100vh
+	overflow: hidden
+
+.screen-pago,
+.screen-pago-terminos
+	height: 100vh
+	overflow: hidden
+	padding-top: 60px
+	.asScrollable-container
+		height: 100vh
+	.asScrollable-bar-vertical
+		z-index: 9999
+
+.screen-pago
+	background-color: transparent
+
+.screen-pago-terminos
+	background-color: $black
+	// background-color: red
+	left: 100%
+	opacity: 1
+	position: absolute
+	top: 0
+	// visibility: hidden
+	width: 100%
+	z-index: 999
+	// +transition(left 0.3s ease-in)
+	.asScrollable-container
+		width: 100% !important
+		.asScrollable-content
+			width: 100% !important
+.screen-pago-terminos-anim
+	// opacity: 1
+	z-index: 999
+
+.screen-int-pago
+	// background-color: red
+	height: 60vh
+	overflow: hidden
+	width: 100%
+	.asScrollable-container
+		// background-color: pink
+		width: 100% !important
+	.asScrollable-content
+		// background-color: orange
+		width: 100% !important
+
+.screen-pago-ticket
+	// background-color: blue
+	// height: 70vh
+	height: 300px
+	width: 100%
+	.asScrollable-container
+		// background-color: pink
+		width: 100% !important
+	.asScrollable-content
+		// background-color: orange
+		width: 100% !important
+
+.screen-seccion
+	// background-color: purple
+	height: 100vh
+	// height: calc(100vh - 26px)
+	overflow: hidden
+
+// .example
+// 	overflow: hidden
+// 	border: 1px solid #e0e0e0
+// 	-webkit-box-shadow: 1px 1px 2px 0px rgba(200, 200, 200, 0.3)
+// 	-moz-box-shadow:    1px 1px 2px 0px rgba(200, 200, 200, 0.3)
+// 	box-shadow:         1px 1px 2px 0px rgba(200, 200, 200, 0.3)
+// 	background-color: #fefefe
+
+// .box
+// 	height: 200px
+
+/* Btn
+   ========================== */
+.btn,
+.btn-small
+	+border-radius(4px)
+	font-size: 1.1em
+	&:active,
+	&:focus,
+	&:hover
+		box-shadow: none
+		outline: none
+	&:active
+		&:focus
+			outline: none
+
+.btn-small
+	font-size: .9em
+
+.btn-blue
+	background-color: $blue
+	color: $white
+	&:active,
+	&:focus
+		background-color: #6DAEF3
+		color: $white
+	&:hover
+		background-color: #377BBC
+		color: $white
+.btn-green
+	background-color: $green
+	color: $white
+	&:active,
+	&:focus
+		background-color: #79DD77
+		color: $white
+	&:hover
+		background-color: #57BC55
+		color: $white
+.btn-red
+	background-color: $red
+	color: $white
+	&:active,
+	&:focus
+		background-color: #ee2e2e
+		color: $white
+	&:hover
+		background-color: #f04e4e
+		color: $white
+.btn-yellow
+	background-color: $yellow
+	color: $white
+.btn-white
+	background-color: $white
+	color: $text-base
+
+
+/* Footer
+   ========================== */
+footer
+	background-color: rgba($black,.7)
+	position: relative
+	text-align: center
+	a
+		color: $gray
+		font-size: .8em
+		padding: 4px 0
+		&:hover
+			color: rgba($white,.7)
+	p
+		// background-color: red
+		color: $gray
+		cursor: pointer
+		font-size: .8em
+		position: absolute
+		right: 23px
+		top: 2px
+		&:hover
+			color: rgba($white,.7)
+
+// Fixed
+.footer-fixed
+	bottom: 0
+	left: 0
+	position: fixed
+	right: 0
+	z-index: 11
+
+// Fixed interno
+.footer-fixed-int
+	bottom: 0
+	left: 0
+	position: fixed
+	right: 50%
+	z-index: 11
+
+
+/* Error
+   ========================== */
+.errorMessage
+	color: $red
+	font-size: .9em
+	text-align: left
+
+.form-control.error
+	border: 1px solid $red !important
+// 	&::-webkit-input-placeholder
+// 		color: $red
+// 	&:-moz-placeholder /* Firefox 18- */
+// 		color: $red
+// 	&::-moz-placeholder /* Firefox 19+ */
+// 		color: $red
+// 	&:-ms-input-placeholder
+// 		color: $red
+
+/* Flex
+   ========================== */
+
+.flex-login
+	display: -webkit-box // OLD - iOS 6-, Safari 3.1-6
+	display: -moz-box // OLD - Firefox 19- (buggy but mostly works)
+	display: -ms-flexbox // TWEENER - IE 10
+	display: -webkit-flex // NEW - Chrome
+	display: flex // NEW, Spec - Opera 12.1, Firefox 20+
+	flex-direction: column
+	-webkit-flex-direction: row-reverse
+	justify-content: center
+	-webkit-box-align: center
+	-webkit-flex-align: center
+	-ms-flex-align: center
+	-webkit-align-items: center
+	align-items: center
+
+
+/* Tooltip
+   ========================== */
+.tooltip
+	// background-color: red !important
+	// .tooltip-arrow
+	.tooltip-inner
+		// border: 1px solid red
+		font-size: 1.1em
+		padding: 6px 30px
+
+
+/* Error (404-500)
+   ========================== */
+
+.error-404,
+.error-500
+	background-position: 50%
+	background-size: cover
+	background-repeat: no-repeat
+	height: 100vh
+	position: relative
+	width: 100%
+	.mask-error
+		background-color: rgba($black,.5)
+		bottom: 0
+		height: 100%
+		left: 0
+		position: absolute
+		right: 0
+		top: 0
+		width: 100%
+		z-index: 1
+	.error-cont
+		// background-color: red
+		height: 100%
+		position: relative
+		width: 45%
+		z-index: 9
+		.error-cont-datos
+			// background-color: $green
+			padding-left: 30px
+			width: 100%
+			h3,
+			p
+				color: $white
+			h3
+				font-family: 'nexa_blackregular'
+				font-size: 4em
+				font-weight: bold
+			p
+				font-family: 'nexaThin'
+				font-size: 1.6em
+				margin: 24px 0 18px
+				span
+					display: block
+			.error-cont-datos-500-p
+				font-size: 1.2em
+			a.error-cont-a
+				color: rgba($white,.4)
+				font-size: .8em
+				text-transform: uppercase
+				&:hover
+					color: $white
+			.btn-green
+				+border-radius(4px)
+				display: inline-block
+				font-size: 1.1em
+				margin-top: 30px
+				padding: 6px 16px
+		
+.error-404
+	background-image: url(../images/bg-error-404.jpg)
+
+.error-500
+	background-image: url(../images/bg-error-500.jpg)
+	.error-cont
+		padding-top: 150px
+	
+/* Flex
+   ========================== */
+.modal-center
+	@extend .flex-login

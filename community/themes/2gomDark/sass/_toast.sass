@@ -1,0 +1,872 @@
+/*!
+	-----------------------------------------------------------------------------
+	
+	4.0 - Toast
+			# Menu
+			# Toast
+			# Flip
+			# Flipped
+
+	-----------------------------------------------------------------------------
+	*/
+
+/* Menu */
+.toast-menu
+	// background-color: red
+	bottom: 40px
+	position: fixed
+	right: 23px
+	text-align: center
+	width: 130px
+	.toast-menu-ok,
+	.toast-menu-add
+		// +border-radius(50%)
+		border: 0
+		color: $white
+		display: inline-block
+		// height: 50px
+		// line-height: 50px
+		padding: 3px 20px
+		text-align: center
+		// width: 50px
+		i
+			font-size: 1.6em
+	.toast-menu-ok
+		background-color: $blue
+		// margin-bottom: 20px
+		&:active
+			background-color: #6DAEF3
+			color: $white
+		&:hover
+			background-color: #377BBC
+			color: $white
+		&:focus
+			outline: none
+	.toast-menu-add
+		background-color: $blue
+
+.mis-fotos
+	// background-color: red
+	padding: 80px 0 50px
+	/* Toast */
+	.toas
+		background-color: rgba($black,.6)
+		+border-radius(4px)
+		color: $white
+		margin: 0 auto
+		width: 90%
+		/* Mensaje Success */
+		.toast-msj-success
+			background-color: $blue
+			+border-radius(4px 4px 0 0)
+			display: none
+			color: $white
+			font-size: 1.2em
+			margin: 0 auto
+			padding: 8px 20px
+			text-align: center
+			width: 100%
+			+transition(all 0.3s ease-in)
+		.toast-msj-success-final
+			display: block
+			+transition(all 0.3s ease-out)
+		.rowToast
+			// background-color: rgba($black,.6)
+			// background-color: red
+			// +border-radius(4px)
+			margin: 0 auto
+			padding: 40px 30px
+			width: 100%
+		h2
+			color: $white
+			font-weight: 700
+			margin-bottom: 50px
+			padding-left: 16px
+			text-transform: uppercase
+			span
+				font-weight: 300
+		.toast-col
+			// background-color: green
+			// border-bottom: 2px solid rgba($white,.2)
+			margin-bottom: 40px
+			padding: 0
+			position: relative
+			&:last-child
+				border-bottom: none
+				padding-bottom: 20px
+			// img
+			// 	+border-radius(4px)
+			// 	height: 200px
+			// 	margin-bottom: 20px
+			// 	width: 100%
+			.imagePreviewFront
+				// background-color: yellow
+				background-position: 50%
+				background-repeat: no-repeat
+				background-size: cover
+				+border-radius(4px)
+				height: 200px
+				margin-bottom: 20px
+				width: 100%
+			.toast-col-row
+				// background-color: red
+				clear: both
+				display: block
+				position: relative
+				h3
+					font-weight: 300
+					margin-bottom: 18px
+				.form-tipo
+					font-size: 1.4em
+					text-align: center
+				.form-titulo
+					text-align: justify
+		form
+			input[type="text"],
+			textarea,
+			select
+				background-color: transparent
+				border: 1px dashed #444
+				color: $white
+				font-family: 'nexaThin'
+				&:focus
+					border-color: #444
+					border-style: solid
+					box-shadow: none
+					outline: none
+				// Input
+				/* all */
+				&::-webkit-input-placeholder
+					color: rgba($white,.4) !important
+				&::-moz-placeholder
+					color: rgba($white,.4) !important // firefox 19+
+				&\:-ms-input-placeholder
+					color: rgba($white,.4) !important // ie
+				&:-moz-placeholder
+					color: rgba($white,.4) !important
+			// input[type="text"]
+			textarea
+				font-size: 1.1em
+				height: 193px
+				overflow: hidden
+				padding: 15px
+				resize: none
+			// Contador de caracteres
+			.caracteres-wrap
+				// background-color: rgba($white,.3)
+				height: 26px
+				margin-bottom: 6px
+				.caracteres
+					color: #F75151
+					display: none
+					text-align: right
+			select
+				// background-color: transparent
+				// border: 1px solid $white
+				-webkit-appearance: none
+				-moz-appearance: none
+				appearance: none
+				background: url("../images/arrow.png") no-repeat 94% center
+				color: $white
+				font-family: 'nexaThin'
+				font-weight: 100
+				height: 40px
+				// line-height: 48px
+				padding: 4px 12px 0
+				option
+					color: $text-base
+					// &:first-child
+					// 	color: rgba($white,.5)
+						// display: none
+				// option[default][disabled]
+				// 		color: rgba($red,.4)
+			// .categoria
+			.placeholder
+				color: rgba($white,.5)
+			// .form-control-tipo
+			// 	color: $white
+			// 	padding: 20px 10px
+			.form-control-titulo
+				font-size: 1.4em
+				height: 60px
+				line-height: 1
+				padding: 10px 15px
+				// margin-bottom: 10px
+				// width: 86%
+			// .form-control-titulo,
+			// .btn-white
+			// 	display: inline-block
+			// 	vertical-align: middle
+			.btn-white
+				background-color: $blue
+				color: $white
+				display: none
+				height: 32px
+				line-height: 22px
+				margin: 0 0 0 auto
+				overflow: hidden
+				padding: 6px 46px 6px 46px
+				position: relative
+				text-align: center
+				// width: 120px
+				&:active,
+				&:focus
+					background-color: #6DAEF3
+					color: $white
+				&:hover
+					background-color: #377BBC
+					color: $white
+					outline: none
+				i
+					// background-color: yellow
+					color: rgba($white,.8)
+					display: block
+					font-size: 2.9em
+					height: 32px
+					left: -3px
+					// margin-left: -13px
+					// margin-top: -7px
+					position: absolute
+					top: -5px
+					width: 32px
+					&:hover
+						color: $white
+			.btn-white-anim
+				background-image: url(../images/loading.gif)
+				background-position: 8px 50%
+				background-repeat: no-repeat
+				background-size: 20px
+
+/* Flip vertical */
+.flip-panel
+	// background-color: #BBB
+	height: 354px
+	padding: 40px 0
+	position: relative
+	width: 100%
+	z-index: 7
+	.front-side,
+	.back-side 
+		height: 354px
+		left: 0
+		padding: 16px
+		position: absolute
+		top: 0
+		width: 100%
+	.front-side,
+	.back-side 
+		-webkit-backface-visibility: hidden
+		-moz-backface-visibility: hidden
+		-ms-backface-visibility: hidden
+		backface-visibility: hidden
+		-webkit-transition: -webkit-transform 0.4s
+		transition: transform 0.4s
+		-webkit-transition-timing-function: cubic-bezier(0.7,0,0.3,1)
+		-moz-transition-timing-function: cubic-bezier(0.7,0,0.3,1)
+		-ms-transition-timing-function: cubic-bezier(0.7,0,0.3,1)
+		transition-timing-function: cubic-bezier(0.7,0,0.3,1)
+	.front-side
+		background-color: transparent
+		overflow: hidden
+		.dgom-ui-front-side
+			background-color: rgba($black,.7)
+			+border-radius(6px)
+			bottom: 0
+			display: none
+			height: 100%
+			left: 0
+			// line-height: 300px
+			position: absolute
+			right: 0
+			top: 0
+			text-align: center
+			+transition(all 0.3s ease-in)
+			width: 100%
+			a,
+			.dgom-menu-btn-group,
+			.dgom-menu-btn-borrar
+				color: rgba($white,.8)
+				cursor: pointer
+				display: inline-block
+				font-size: 1.6em
+				margin-right: 140px
+				margin-top: 112px
+				&:last-child
+					margin-right: 0
+				&:hover
+					color: $white
+				&:focus
+					outline: none
+				i.fa-rotate-45
+					-webkit-transform: rotate(45deg)
+					-moz-transform: rotate(45deg)
+					-ms-transform: rotate(45deg)
+					transform: rotate(45deg)
+				span
+					display: block
+					font-size: .75em
+		&:hover
+			// background-color: $blue
+			.dgom-ui-front-side
+				display: block
+	.back-side 
+		background-color: transparent
+		-webkit-transform: rotateX(-180deg)
+		-moz-transform: rotateX(-180deg)
+		-ms-transform: rotateX(-180deg)
+		transform: rotateX(-180deg)
+		// &:hover
+		// 	background-color: $green
+
+
+/* Flipped */
+// click effect flip panel
+.flip-panel.flipped .front-side
+	// background-color: red
+	-webkit-transform: rotateX(-180deg)
+	-moz-transform: rotateX(-180deg)
+	-ms-transform: rotateX(-180deg)
+	transform: rotateX(-180deg)
+
+.flip-panel.flipped .back-side
+	// background-color: yellow
+	-webkit-transform: rotateX(0)
+	-moz-transform: rotateX(0)
+	-ms-transform: rotateX(0)
+	transform: rotateX(0)
+
+/* Upload */
+.toast-col-row
+	.myFile
+		// background-color: pink
+		border: 1px dashed #444
+		+border-radius(4px)
+		display: inline-block
+		font-family: 'nexaThin'
+		height: 200px
+		margin: 0 auto 22px
+		overflow: hidden
+		// padding: 40px 0 10px
+		position: relative
+		width: 100%
+		// &:hover
+		// 	border: 1px dashed $white
+			// -ms-transform: scale(2,3)
+			// -webkit-transform: scale(2,3)
+			// transform: scale(2,3)
+		.myFile-default
+			background-position: 50%
+			background-size: cover
+			background-repeat: no-repeat
+			bottom: 0
+			height: 200px
+			left: 0
+			opacity: .2
+			position: absolute
+			right: 0
+			top: 0
+			width: 100%
+			+transition(opacity 0.3s ease-in)
+		.myFile-default-upload-anim
+			opacity: 1
+			+transition(opacity 0.3s ease-out)
+		.myFiler
+			background-color: $white
+			background-image: url(../images/users.jpg)
+			background-position: 50%
+			background-repeat: no-repeat
+			background-size: 80%
+			border: 2px solid $text-base
+			+border-radius(50%)
+			height: 120px
+			margin: 20px auto 10px
+			position: relative
+			width: 120px
+		input[type="file"]
+			cursor: pointer
+			display: block
+			filter: alpha(opacity=0)
+			font-size: 100px
+			height: 200px
+			opacity: 0
+			position: absolute
+			right: 0
+			top: 0
+		// Textos
+		.myFileText
+			// background-color: rgba(blue,.3)
+			bottom: 0
+			left: 0
+			padding: 20px 0
+			position: absolute
+			right: 0
+			top: 0
+			i
+				font-size: 2em
+				margin: 54px auto 10px
+				position: relative
+			p
+				font-family: 'nexaThin'
+				font-weight: 100
+				margin-top: 20px
+				// text-transform: uppercase
+				white-space: nowrap
+				opacity: .65
+				overflow: hidden
+				position: relative
+				text-overflow: ellipsis
+		// Progress
+		.progress-upload
+			// background-color: rgba($black,.3)
+			bottom: 8px
+			display: none
+			height: 100%
+			left: 50%
+			margin-left: -45%
+			padding: 20px 0
+			position: absolute
+			width: 90%
+			.progress-nom
+				// background-color: red
+				color: $white
+				font-size: .9em
+				margin-top: 45px
+				text-align: left
+				width: 100%
+				i.icon,
+				p
+					display: inline-block
+					vertical-align: middle
+				i.icon
+					font-size: 1.45em
+					margin-right: 8px
+				p
+					// background-color: purple
+					height: 25px
+					max-width: 230px
+					overflow: hidden
+					padding: 4px 0
+					text-overflow: ellipsis
+					white-space: nowrap 
+					width: 90%
+			.progress
+				background-color: $white
+				+border-radius(10px)
+				border: none
+				display: block
+				height: 10px
+				margin: 12px 0 8px
+				padding: 0
+				width: 100%
+				// .progress-bar progress-bar-striped active
+				.progress-bar-blue
+					background-color: $blue
+				.progress-bar-red
+					background-color: $red
+				.progress-bar-anim
+					width: 100% !important 
+			.progress-num
+				color: $white
+				font-size: .9em
+				text-align: center
+			.progress-close
+				position: absolute
+				right: 0
+				top: 10px
+				i
+					font-size: 1.1em
+	// Drag drop
+	.myFile-drag
+		border: 1px dashed $white
+	// Error
+	.myFile-drag
+		border: 1px dashed $red
+	// Terminado
+	.myFile-noSlash
+		border: 1px dashed transparent
+
+// Flip User
+/* Flip horizontal */
+.user-flip
+	// background-color: #BBB
+	height: 300px
+	padding: 40px 0
+	position: relative
+	width: 100%
+	z-index: 7
+	.user-front-side,
+	.user-back-side 
+		height: 300px
+		left: 0
+		padding: 16px
+		position: absolute
+		top: 0
+		width: 100%
+	.user-front-side,
+	.user-back-side 
+		-webkit-backface-visibility: hidden
+		-moz-backface-visibility: hidden
+		-ms-backface-visibility: hidden
+		backface-visibility: hidden
+		-webkit-transition: -webkit-transform 0.4s
+		transition: transform 0.4s
+		-webkit-transition-timing-function: cubic-bezier(0.7,0,0.3,1)
+		transition-timing-function: cubic-bezier(0.7,0,0.3,1)
+	.user-front-side
+		background-color: transparent
+		overflow: hidden
+	.user-back-side 
+		background-color: transparent
+		-webkit-transform: rotateX(-180deg)
+		transform: rotateX(-180deg)
+
+/* Flipped */
+// click effect flip panel
+.user-flip.flipped .user-front-side 
+	-webkit-transform: rotateX(-180deg)
+	transform: rotateX(-180deg)
+
+.user-flip.flipped .user-back-side  
+	-webkit-transform: rotateX(0)
+	transform: rotateX(0)
+
+// Upload - Progress
+.progress
+	text-align: left
+	margin-top: 20px
+	display: none
+	position: relative
+	width: 400px
+	border: 1px solid #ddd
+	padding: 1px
+	border-radius: 3px
+.bar
+	background-color: #2E64FE
+	width: 0%
+	height: 30px
+	border-radius: 3px
+.percent
+	position: absolute
+	display: inline-block
+	top: 8px
+	left: 48%
+#output_image
+	img
+		margin-top: 20px
+		width: 300px
+
+
+/**/
+.progress
+	display: none
+	position: relative
+	width: 400px 
+	border: 1px solid #ddd 
+	padding: 1px 
+	border-radius: 3px 
+
+.bar 
+	background-color: #B4F5B4 
+	width: 0% 
+	height: 20px 
+	border-radius: 3px 
+
+.percent 
+	position: absolute 
+	display: inline-block 
+	top: 3px 
+	left: 48% 
+
+
+
+/*********************/
+.mfp-no-margins img.mfp-img 
+	padding: 0
+
+.mfp-no-margins .mfp-figure:after 
+	top: 0
+	bottom: 0
+
+.mfp-no-margins .mfp-container 
+	padding: 0
+
+/**
+ * Simple fade transition,
+ */
+.mfp-fade.mfp-bg 
+	opacity: 0
+	-webkit-transition: all 0.15s ease-out
+	-moz-transition: all 0.15s ease-out
+	transition: all 0.15s ease-out
+
+.mfp-fade.mfp-bg.mfp-ready 
+	opacity: 0.8
+
+.mfp-fade.mfp-bg.mfp-removing 
+	opacity: 0
+
+.mfp-fade.mfp-wrap .mfp-content 
+	opacity: 0
+	-webkit-transition: all 0.15s ease-out
+	-moz-transition: all 0.15s ease-out
+	transition: all 0.15s ease-out
+
+.mfp-fade.mfp-wrap.mfp-ready .mfp-content 
+	opacity: 1
+
+.mfp-fade.mfp-wrap.mfp-removing .mfp-content 
+	opacity: 0
+
+/* Styles for dialog window */
+#small-dialog 
+	background: white
+	padding: 20px 30px
+	text-align: left
+	max-width: 400px
+	margin: 40px auto
+	position: relative
+
+/**
+ * Fade-zoom animation for first dialog
+ */
+
+/* start state */
+.my-mfp-zoom-in #small-dialog 
+	opacity: 0
+	-webkit-transition: all 0.2s ease-in-out
+	-moz-transition: all 0.2s ease-in-out
+	-o-transition: all 0.2s ease-in-out
+	transition: all 0.2s ease-in-out
+	-webkit-transform: scale(0.8)
+	-moz-transform: scale(0.8)
+	-ms-transform: scale(0.8)
+	-o-transform: scale(0.8)
+	transform: scale(0.8)
+
+/* animate in */
+.my-mfp-zoom-in.mfp-ready #small-dialog 
+	opacity: 1
+	-webkit-transform: scale(1)
+	-moz-transform: scale(1)
+	-ms-transform: scale(1)
+	-o-transform: scale(1)
+	transform: scale(1)
+
+/* animate out */
+.my-mfp-zoom-in.mfp-removing #small-dialog 
+	-webkit-transform: scale(0.8)
+	-moz-transform: scale(0.8)
+	-ms-transform: scale(0.8)
+	-o-transform: scale(0.8)
+	transform: scale(0.8)
+	opacity: 0
+
+/* Dark overlay, start state */
+.my-mfp-zoom-in.mfp-bg 
+	opacity: 0
+	-webkit-transition: opacity 0.3s ease-out
+	-moz-transition: opacity 0.3s ease-out
+	-o-transition: opacity 0.3s ease-out
+	transition: opacity 0.3s ease-out
+
+/* animate in */
+.my-mfp-zoom-in.mfp-ready.mfp-bg 
+	opacity: 0.8
+
+/* animate out */
+.my-mfp-zoom-in.mfp-removing.mfp-bg 
+	opacity: 0
+
+/**
+ * Fade-move animation for second dialog
+ */
+
+/* at start */
+.my-mfp-slide-bottom #small-dialog 
+	opacity: 0
+	-webkit-transition: all 0.2s ease-out
+	-moz-transition: all 0.2s ease-out
+	-o-transition: all 0.2s ease-out
+	transition: all 0.2s ease-out
+	-webkit-transform: translateY(-20px) perspective( 600px ) rotateX( 10deg )
+	-moz-transform: translateY(-20px) perspective( 600px ) rotateX( 10deg )
+	-ms-transform: translateY(-20px) perspective( 600px ) rotateX( 10deg )
+	-o-transform: translateY(-20px) perspective( 600px ) rotateX( 10deg )
+	transform: translateY(-20px) perspective( 600px ) rotateX( 10deg )
+
+/* animate in */
+.my-mfp-slide-bottom.mfp-ready #small-dialog 
+	opacity: 1
+	-webkit-transform: translateY(0) perspective( 600px ) rotateX( 0 )
+	-moz-transform: translateY(0) perspective( 600px ) rotateX( 0 )
+	-ms-transform: translateY(0) perspective( 600px ) rotateX( 0 )
+	-o-transform: translateY(0) perspective( 600px ) rotateX( 0 )
+	transform: translateY(0) perspective( 600px ) rotateX( 0 )
+
+/* animate out */
+.my-mfp-slide-bottom.mfp-removing #small-dialog 
+	opacity: 0
+	-webkit-transform: translateY(-10px) perspective( 600px ) rotateX( 10deg )
+	-moz-transform: translateY(-10px) perspective( 600px ) rotateX( 10deg )
+	-ms-transform: translateY(-10px) perspective( 600px ) rotateX( 10deg )
+	-o-transform: translateY(-10px) perspective( 600px ) rotateX( 10deg )
+	transform: translateY(-10px) perspective( 600px ) rotateX( 10deg )
+
+/* Dark overlay, start state */
+.my-mfp-slide-bottom.mfp-bg 
+	opacity: 0
+	-webkit-transition: opacity 0.3s ease-out
+	-moz-transition: opacity 0.3s ease-out
+	-o-transition: opacity 0.3s ease-out
+	transition: opacity 0.3s ease-out
+
+/* animate in */
+.my-mfp-slide-bottom.mfp-ready.mfp-bg 
+	opacity: 0.8
+
+/* animate out */
+.my-mfp-slide-bottom.mfp-removing.mfp-bg 
+	opacity: 0
+
+
+/**
+ * Modal - Mensaje de Eliminar FOTO
+ */
+.modal-mensaje-eliminar
+	.modal-header
+		background-color: $red
+		padding: 10px 20px
+		.close
+			i.icon
+				font-size: 1.2em
+			&:focus
+				outline: none
+	.modal-body
+		color: $text-base
+		text-align: center
+		p
+			margin-bottom: 8px
+	.modal-footer
+		text-align: center
+		// .btn-borrar-foto
+		.btn-borrar-foto-anim
+			background-image: url(../images/loading.gif)
+			background-position: 8px 50%
+			background-repeat: no-repeat
+			background-size: 20px
+			padding: 6px 38px
+
+/**
+ * Modal - Mensaje de Datos COMPLETOS
+ */
+.modal-mensaje-datos-completos
+	.modal-header
+		background-color: $blue
+		padding: 10px 20px
+		.close
+			i.icon
+				font-size: 1.2em
+			&:focus
+				outline: none
+	.modal-body
+		color: $text-base
+		text-align: center
+		p
+			margin-bottom: 8px
+	.modal-footer
+		padding: 12px 0
+		text-align: center
+		.btn
+			font-size: 14px
+
+/**
+ * Modal - Necesito ayuda
+ */
+.modal-necesito-ayuda
+	.modal-dialog
+		max-width: 500px
+		width: 90%
+	.modal-content
+		width: 100%
+	.modal-header
+		background-color: $orange
+		padding: 10px 20px
+		text-align: left
+		.close
+			i.icon
+				font-size: 1.2em
+			&:focus
+				outline: none
+	.modal-body
+		color: $text-base
+		padding: 20px 20px 0 20px
+		text-align: left
+		p
+			margin-bottom: 8px
+		textarea
+			height: 180px
+			resize: none
+		.btn-necesito-ayuda
+			font-size: 14px !important
+			padding: 4px 36px !important
+		.btn-necesito-ayuda-anim
+				background-image: url(../images/loading.gif)
+				background-position: 8px 50%
+				background-repeat: no-repeat
+				background-size: 20px
+
+// Toast Extend
+/* Toast */
+#toast-container
+	> div
+		box-shadow: none
+		opacity: 1
+		padding: 15px 15px 15px 20px
+		&:hover
+			box-shadow: none
+	> .toast-success
+		background-image: none !important
+	> .toast-warning
+		background-image: none !important
+	> .toast-info
+		background-image: none !important
+	> .toast-error
+		background-image: none !important
+.toast-top-right
+	top: 60px
+.toast-success
+	background-color: $green
+.toast-warning
+	background-color: $yellow
+.toast-info
+	background-color: $blue
+.toast-error
+	background-color: $red
+
+
+/* Efeect Click Btn XS */
+.ripplexs
+	background-color: rgba(0, 0, 0, 0.45)
+	border-radius: 100%
+	height: 40px
+	width: 40px
+	// margin-top: -90px
+	position: relative
+	-webkit-transform: scale(0)
+	transform: scale(0)
+
+.animatexs
+	-webkit-animation: ripplexs 0.4s linear
+	animation: ripplexs 0.4s linear
+
+@-webkit-keyframes ripplexs 
+	100% 
+		-webkit-transform: scale(5)
+		transform: scale(5)
+		background-color: transparent
+  
+@keyframes ripplexs
+	100% 
+		-webkit-transform: scale(5)
+		transform: scale(5)
+		background-color: transparent

@@ -1,0 +1,92 @@
+/*!
+	-----------------------------------------------------------------------------
+	
+	4.0 - Upload
+
+	-----------------------------------------------------------------------------
+	*/
+
+/* Upload */
+.upload
+	padding: 80px 0
+	.text
+		padding-top: 140px
+		h2
+			color: $white
+			font-size: 2.8em
+			font-weight: 700
+			margin: 0 auto
+			width: 80%
+			span
+				display: block
+				@include respond-to(xs)
+					display: inline-block
+	.file-upload
+		text-align: center
+		span
+			color: $white
+			font-size: 1em
+		.file-uploads
+			background-color: rgba($blue,.6)
+			+border-radius(3px)
+			height: 420px
+			line-height: 420px
+			// padding: 30px
+		.file-uploads-active
+			background-color: rgba($blue,.6)
+			+border-radius(3px)
+			display: none
+			height: 420px
+			padding: 30px
+			text-align: left
+			.file-uploads-active-cargar
+				border: 2px dashed rgba($white,.6)
+				+border-radius(3px)
+				height: 180px
+				margin: 30px auto 25px
+				max-width: 100%
+				width: 180px
+			.bt
+				+border-radius(3px)
+				color: $white
+				font-size: .9em
+				margin: 0 auto 10px
+				max-width: 150px
+				padding: 10px 20px
+				text-align: center
+				width: 100%
+			.bt-green
+				@extend .bt
+				background-color: $green
+			.bt-blue
+				display: none
+				@extend .bt
+				background-color: $blue
+			// Lista Vacia
+			.file-uploads-active-list
+				// background-color: red
+				height: 300px
+				h3
+					color: $white
+					font-size: 1.45em
+					font-weight: 800
+					padding-top: 100px
+			// Lista
+			.file-uploads-active-lista
+				// background-color: rgba($black,.1)
+				display: none
+				.file-uploads-active-archivo
+					border-bottom: 1px solid rgba($white,.4)
+					color: $white
+					margin-bottom: 4px
+					padding: 16px 0
+		.file-uploads,
+		.file-uploads-active
+			margin-bottom: 6px
+			p
+				color: $white
+				font-size: 1.6em
+				font-weight: 400
+				text-transform: uppercase
+				span
+					font-weight: 100

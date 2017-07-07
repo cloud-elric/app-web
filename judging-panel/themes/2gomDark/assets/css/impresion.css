@@ -1,0 +1,152 @@
+@media print {
+
+	/* Pantalla Consulta - Impresión */
+	/* Btn Back */
+	.dgom-ui-consulta-back{display: none;}
+	/* Consulta Wrapper */
+	.dgom-ui-consulta-wrapper{
+		margin: 50px 0;
+		width: 100%;
+	}
+		.dgom-ui-consulta-wrapper-contend{
+			background-color: #FFF;
+			margin: 0 auto;
+			padding: 1em;
+			width: 80%;
+		}
+			/* Foto */
+			.dgom-ui-consulta-wrapper-contend-foto{
+				border: 2px solid #FFF;
+				padding: 1em;
+				width: 100%;
+			}
+				.dgom-ui-consulta-wrapper-contend-foto-row{
+					padding: 18px 16px;
+				}
+					.dgom-ui-consulta-wrapper-contend-foto-row .dgom-ui-consulta-wrapper-contend-foto-row-col{padding: 0 4px !important;}
+					.dgom-ui-consulta-wrapper-contend-foto-row .dgom-ui-consulta-wrapper-contend-foto-row-col h5, .dgom-ui-consulta-wrapper-contend-foto-row .dgom-ui-consulta-wrapper-contend-foto-row-col p{margin: 0;}
+					.dgom-ui-consulta-wrapper-contend-foto-row .dgom-ui-consulta-wrapper-contend-foto-row-col h5{font-size: .8em;}
+					.dgom-ui-consulta-wrapper-contend-foto-row .dgom-ui-consulta-wrapper-contend-foto-row-col p{
+						font-size: 2em;
+						line-height: 1;
+					}
+
+			/* Textos en blanco */
+			.dgom-ui-consulta-wrapper-contend-foto-row .dgom-ui-consulta-wrapper-contend-foto-row-col h5, 
+			.dgom-ui-consulta-wrapper-contend-foto-row .dgom-ui-consulta-wrapper-contend-foto-row-col p,
+			
+			.dgom-ui-consulta-wrapper-contend-titulo,
+			.dgom-ui-consulta-wrapper-contend-mention,
+			.dgom-ui-consulta-wrapper-contend-descricion,
+			.dgom-ui-consulta-wrapper-contend-progreso p,
+			.dgom-ui-consulta-wrapper-contend-progreso .pie-progress,
+
+			.dgom-ui-consulta-wrapper-contend-feedback-row h3,
+			.dgom-ui-consulta-wrapper-contend-feedback-row p
+			{
+				color: #000;
+			}
+			/* Titulo */
+			.dgom-ui-consulta-wrapper-contend-titulo{margin: 0;}
+			/* Mention */
+			.dgom-ui-consulta-wrapper-contend-mention{}
+				.dgom-ui-consulta-wrapper-contend-mention .btn-mention,
+				.dgom-ui-consulta-wrapper-contend-mention span{font-size: .8em; vertical-align: middle;}
+				.dgom-ui-consulta-wrapper-contend-mention .btn-mention{
+					background-color: #51ABE8;
+					border-radius: 50%;
+					color: #FFF;
+					height: 20px;
+					width: 20px;
+					padding: 0;
+					line-height: 0;
+				}
+			/* Descripcion */
+			.dgom-ui-consulta-wrapper-contend-descricion{padding: 12px 0; word-wrap: break-word;}
+			/* Progreso */
+			.dgom-ui-consulta-wrapper-contend-progreso p,
+			.dgom-ui-consulta-wrapper-contend-progreso .pie-progress{
+				display: inline-block;
+				vertical-align: top;
+			}
+			.dgom-ui-consulta-wrapper-contend-progreso .pie-progress{width: 70px;}
+			.dgom-ui-consulta-wrapper-contend-progreso .pie-progress{margin: 0;}
+		
+		/* Feedback */
+		.dgom-ui-consulta-wrapper-contend-feedback-row{padding: 0 4px;}
+		.dgom-ui-consulta-wrapper-contend-feedback-row h3{
+			font-size: 1.4em;
+			margin-bottom: 18px;
+		}
+		.dgom-ui-consulta-wrapper-contend-feedback-row p{
+			text-align: justify;
+			margin-bottom: 30px;
+			word-wrap: break-word;
+		}
+
+
+	.dgom-ui-impresion-contenedor{
+		overflow: hidden;
+		width:1200px;
+	}
+		.dgom-ui-impresion-contenedor .grid {
+			float:left;
+			display:inline;
+			padding-right: 15px;
+			padding-left: 15px;
+		}
+	
+	
+	.grid1 {width:8.33%}
+	.grid2 {width:16.66%}
+	.grid3 {width:25%}
+	.grid4 {width:33.33%}
+	.grid5 {width:41.66%}
+	.grid6 {width:50%}
+	.grid7 {width:58.33%}
+	.grid8 {width:66.66%}
+	.grid9 {width:75%}
+	.grid10 {width:83.33%}
+	.grid11 {width:91.66%}
+	.grid12 {width:100%}
+	
+	
+	/* Media queries */
+	@media only screen and (min-width: 1200px) {
+		.dgom-ui-impresion-contenedor{width:1200px;margin:0 auto;}
+		.dgom-ui-impresion-contenedor > h1:after { content:"\A(min-width: 1200px)" }
+	}
+ 
+	@media only screen and (max-width: 1200px) and (min-width: 980px) {
+		.dgom-ui-impresion-contenedor{width:960px;margin:0 auto;}
+		.dgom-ui-impresion-contenedor > h1:after { content:"\A(max-width: 1200px) and (min-width: 980px)" }
+	}
+ 
+	@media only screen and (min-width: 768px) and (max-width: 979px) {
+		.dgom-ui-impresion-contenedor{width:720px;margin:0 auto;}
+		.dgom-ui-impresion-contenedor > h1:after { content:"\A(min-width: 768px) and (max-width: 979px)" }
+	}
+ 
+	@media only screen and (max-width: 479px) {
+		.dgom-ui-impresion-contenedor{width:320px;margin:0 auto;}
+		.dgom-ui-impresion-contenedor > h1:after { content:"\A(max-width: 479px)" }
+		div[class*='grid'] {width:100%}
+	}
+ 
+	@media only screen and (min-width: 480px) and (max-width: 767px) {
+		.dgom-ui-impresion-contenedor{width:480px;margin:0 auto;}
+		.dgom-ui-impresion-contenedor > h1:after { content:"\A(min-width: 480px) and (max-width: 767px)" }
+		div[class*='grid'] {width:100%}
+	}
+
+
+	/* row */
+	.row {
+		clear: both;
+		display: block;
+	    margin-right: -15px;
+	    margin-left: -15px;
+	}
+
+
+}

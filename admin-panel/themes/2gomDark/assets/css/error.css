@@ -1,0 +1,238 @@
+/* ALL */
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Fonts */
+@font-face {
+    font-family: 'nexaThin';
+    src: url('../fonts/nexa/nexathin-webfont.eot');
+    src: url('../fonts/nexa/nexathin-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/nexa/nexathin-webfont.woff2') format('woff2'),
+         url('../fonts/nexa/nexathin-webfont.woff') format('woff'),
+         url('../fonts/nexa/nexathin-webfont.ttf') format('truetype'),
+         url('../fonts/nexa/nexathin-webfont.svg#nexa_thinregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'nexaReg';
+    src: url('../fonts/nexa/nexaregular-webfont.eot');
+    src: url('../fonts/nexa/nexaregular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/nexa/nexaregular-webfont.woff2') format('woff2'),
+         url('../fonts/nexa/nexaregular-webfont.woff') format('woff'),
+         url('../fonts/nexa/nexaregular-webfont.ttf') format('truetype'),
+         url('../fonts/nexa/nexaregular-webfont.svg#nexa_regularregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'nexaBook';
+    src: url('../fonts/nexa/nexa-book-webfont.eot');
+    src: url('../fonts/nexa/nexa-book-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/nexa/nexa-book-webfont.woff2') format('woff2'),
+         url('../fonts/nexa/nexa-book-webfont.woff') format('woff'),
+         url('../fonts/nexa/nexa-book-webfont.ttf') format('truetype'),
+         url('../fonts/nexa/nexa-book-webfont.svg#nexa_bookregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'nexaBlack';
+    src: url('../fonts/nexa/nexablack-webfont.eot');
+    src: url('../fonts/nexa/nexablack-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/nexa/nexablack-webfont.woff2') format('woff2'),
+         url('../fonts/nexa/nexablack-webfont.woff') format('woff'),
+         url('../fonts/nexa/nexablack-webfont.ttf') format('truetype'),
+         url('../fonts/nexa/nexablack-webfont.svg#nexa_bookregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+  font-family: 'nexaBook';
+  font-size: 16px;
+}
+
+/* a */
+a {
+  text-decoration: none;
+  -ms-transition: all 0.3s ease-in;
+  -moz-transition: all 0.3s ease-in;
+  -webkit-transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in;
+}
+
+a:hover {
+  text-decoration: none;
+  -ms-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+
+/* Flex */
+.flex-error{
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row-reverse;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-flex-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+/* Footer */
+.footer-fixed{
+  background-color: rgba(0,0,0,.3);
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  width: 100%;
+  z-index: 9;
+}
+  .footer-fixed a{
+    color: rgba(255,255,255,.3);
+    display: block;
+    font-size: .85em;
+    padding: 4px 0;
+    text-align: center;
+  }
+  .footer-fixed a:hover{
+    color: rgba(255,255,255,.6);
+  }
+
+/*  Error (403-404-500)
+    =============================== */
+.error-403,
+.error-404,
+.error-500 {
+  background-position: 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  position: relative;
+  width: 100%;
+}
+
+.error-403 .mask-error,
+.error-404 .mask-error,
+.error-500 .mask-error {
+  background-color: rgba(0, 0, 0, 0.5);
+  bottom: 0;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.error-403 .error-cont,
+.error-404 .error-cont,
+.error-500 .error-cont {
+  height: 100%;
+  position: relative;
+  width: 45%;
+  z-index: 9;
+}
+
+.error-403 .error-cont .error-cont-datos,
+.error-404 .error-cont .error-cont-datos,
+.error-500 .error-cont .error-cont-datos {
+  padding-left: 50px;
+  width: 100%;
+}
+
+.error-403 .error-cont .error-cont-datos h3,
+.error-403 .error-cont .error-cont-datos p,
+.error-404 .error-cont .error-cont-datos h3,
+.error-404 .error-cont .error-cont-datos p,
+.error-500 .error-cont .error-cont-datos h3,
+.error-500 .error-cont .error-cont-datos p {
+  color: #FFF;
+}
+
+.error-403 .error-cont .error-cont-datos h3,
+.error-404 .error-cont .error-cont-datos h3,
+.error-500 .error-cont .error-cont-datos h3 {
+  font-family: 'nexaBlack';
+  font-size: 4em;
+  font-weight: bold;
+}
+
+.error-403 .error-cont .error-cont-datos p,
+.error-404 .error-cont .error-cont-datos p,
+.error-500 .error-cont .error-cont-datos p {
+  font-family: 'nexaThin';
+  font-size: 1.6em;
+  margin: 24px 0 18px;
+}
+
+.error-403 .error-cont .error-cont-datos p span,
+.error-404 .error-cont .error-cont-datos p span,
+.error-500 .error-cont .error-cont-datos p span {
+  display: block;
+}
+
+.error-403 .error-cont .error-cont-datos .error-cont-datos-500-p,
+.error-404 .error-cont .error-cont-datos .error-cont-datos-500-p,
+.error-500 .error-cont .error-cont-datos .error-cont-datos-500-p {
+  font-size: 1.2em;
+}
+
+.error-403 .error-cont .error-cont-datos a.error-cont-a,
+.error-404 .error-cont .error-cont-datos a.error-cont-a,
+.error-500 .error-cont .error-cont-datos a.error-cont-a {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: .8em;
+  text-transform: uppercase;
+}
+
+.error-403 .error-cont .error-cont-datos a.error-cont-a:hover,
+.error-404 .error-cont .error-cont-datos a.error-cont-a:hover,
+.error-500 .error-cont .error-cont-datos a.error-cont-a:hover {
+  color: #FFF;
+}
+
+.error-403 .error-cont .error-cont-datos .btn-green,
+.error-404 .error-cont .error-cont-datos .btn-green,
+.error-500 .error-cont .error-cont-datos .btn-green {
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  border-radius: 4px;
+  display: inline-block;
+  font-size: 1.1em;
+  margin-top: 30px;
+  padding: 6px 16px;
+}
+
+
+.error-403 {
+  background-image: url(../images/bg-error-403.jpg);
+}
+
+.error-404 {
+  background-image: url(../images/bg-error-404.jpg);
+}
+
+.error-500 {
+  background-image: url(../images/bg-error-500.jpg);
+}
+
+.error-500 .error-cont {
+  padding-top: 150px;
+}

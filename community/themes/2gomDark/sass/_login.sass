@@ -1,0 +1,205 @@
+/*!
+	-----------------------------------------------------------------------------
+	
+	5.0 - login
+
+	-----------------------------------------------------------------------------
+	*/
+
+
+/* Login */
+.login
+	// background-color: rgba(green,.2)
+	margin: 0 auto
+	// max-width: 1024px
+	padding: 40px 0 60px
+	// width: 90%
+	.login-col-flex
+		@extend .flex-login
+		height: 95vh
+	.login-text
+		// background-color: rgba($red,.3)
+		margin: 0 auto
+		max-width: 460px
+		width: 100%
+		h2
+			color: $white
+			font-family: 'nexaThin'
+			font-size: 2.4em
+			font-weight: 100
+			margin-bottom: 30px
+			text-align: left
+			img
+				display: block
+				max-width: 100%
+				padding: 20px 0
+				width: 100%
+			span
+				display: block
+				font-family: 'nexa_blackregular'
+				font-size: 1.4em
+				font-weight: 800
+				text-transform: uppercase
+		.btn
+			font-size: 1.1em
+			padding: 6px 16px
+		p
+			// background-color: red
+			color: $gray
+			cursor: pointer
+			font-size: .8em
+			margin-top: 20px
+			&:hover
+				color: rgba($white,.7)
+	.login-form
+		background-color: $white
+		+border-radius(3px)
+		margin: 0 auto
+		max-width: 100%
+		padding: 20px 20px 0
+		text-align: center
+		width: 330px
+		img
+			margin: 0 auto
+			max-width: 120px
+			width: 100%
+		h1
+			font-size: .9em
+			margin: 25px 0 30px
+			text-transform: uppercase
+		form
+			// background-color: rgba($green,.3)
+			// height: 427px
+			margin: 0 auto
+			width: 90%
+			// &.form-reset
+			// 	height: 400px
+			p
+				font-size: 1em
+				line-height: 1
+				// margin-bottom: 20px
+				text-align: left
+			input[type="password"],
+			input[type="text"]
+				border: 1px solid $text-base
+				height: 40px
+				// padding: 0
+				&:focus
+					box-shadow: none
+					outline: none
+			input[type="password"],
+			input[type="text"],
+			button,
+			input[type="submit"],
+			a,
+			span
+				display: block
+				margin: 16px auto 0
+			button,
+			input[type="submit"]
+				font-size: 1.1em
+				width: 100%
+			.olvide
+				// background-color: rgb(209, 109, 109)
+				color: $blue
+				font-size: 1em
+				// &:active
+				// 	background-color: #F36D6D
+				// &:hover
+				// 	background-color: rgba(209, 109, 109, .2)
+				&:focus
+					outline: none
+					text-decoration: none
+			.necesito
+				color: $red
+				margin: 22px auto
+				&:active
+					color: #F36D6D
+				&:hover
+					background-color: rgba(209, 109, 109, .2)
+				&:focus
+					outline: none
+					text-decoration: none
+			.recuperar-necesito
+				// background-color: rgba($yellow,.6)
+				margin: 50px 0
+			.btn-facebook
+				background-color: #3B5999
+				&:active,
+				&:focus
+					background-color: #6DAEF3
+					color: $white
+				&:hover
+					background-color: #377BBC
+					color: $white
+		.all-right
+			color: $gray-hide
+			font-size: .8em
+			padding-bottom: 3px
+
+ /* Error de login, cambiar contraseña y recuperar contraseña*/
+.errorMessage
+	color: #FFF
+	margin-top: 15px
+	padding: 5px 10px
+	+border-radius(4px)
+	background-color: #F75151
+
+
+// FLIP
+// Login - Olvide mi contraseña
+/* Login Form FLIP */
+.login-form-flip
+	.login-form-flip
+	// background-color: #BBB
+	height: 400px
+	padding: 0
+	position: relative
+	width: 100%
+	z-index: 7
+	.login-form-front-side,
+	.login-form-back-side
+		left: 0
+		padding: 0
+		position: absolute
+		top: 0
+		width: 100%
+	.login-form-front-side,
+	.login-form-back-side
+		-webkit-backface-visibility: hidden
+		-moz-backface-visibility: hidden
+		-ms-backface-visibility: hidden
+		backface-visibility: hidden
+		-webkit-transition: -webkit-transform 0.4s
+		transition: transform 0.4s
+		-webkit-transition-timing-function: cubic-bezier(0.7,0,0.3,1)
+		-moz-transition-timing-function: cubic-bezier(0.7,0,0.3,1)
+		-ms-transition-timing-function: cubic-bezier(0.7,0,0.3,1)
+		transition-timing-function: cubic-bezier(0.7,0,0.3,1)
+	.login-form-front-side
+		background-color: transparent
+		// background-color: $yellow
+		height: 400px
+		overflow: hidden
+	.login-form-back-side 
+		background-color: transparent
+		// background-color: $orange
+		height: 300px
+		-webkit-transform: rotateY(-180deg)
+		-ms-transform: rotateY(-180deg)
+		-o-transform: rotateY(-180deg)
+		transform: rotateY(-180deg)
+
+/* Flipped */
+// click effect flip panel
+.login-form-flip.flipped .login-form-front-side 
+	-webkit-transform: rotateY(-180deg)
+	-ms-transform: rotateY(-180deg)
+	-o-transform: rotateY(-180deg)
+	transform: rotateY(-180deg)
+
+.login-form-flip.flipped .login-form-back-side  
+	-webkit-transform: rotateY(0)
+	-ms-transform: rotateY(0)
+	-o-transform: rotateY(0)
+	transform: rotateY(0)

@@ -1,0 +1,88 @@
+body{
+	
+	margin-top: -22px;
+}
+.error-404 {
+	background-image: url(../images/bg-error-404.jpg);
+}
+
+.error-404, .error-500, .error-403 {
+	background-position: 50%;
+	background-size: cover;
+	background-repeat: no-repeat;
+	height: 100vh;
+	position: relative;
+	width: 100%;
+}
+
+.error-404 .mask-error, .error-500 .mask-error, .error-403 .mask-error {
+	background-color: rgba(0, 0, 0, 0.5);
+	bottom: 0;
+	height: 100%;
+	left: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 100%;
+	z-index: 1;
+}
+
+.error-404 .error-cont, .error-500 .error-cont, .error-403 .error-cont {
+	height: 100%;
+	position: relative;
+	width: 45%;
+	z-index: 9;
+}
+
+.error-404 .error-cont .error-cont-datos, .error-500 .error-cont .error-cont-datos, .error-404 .error-cont .error-cont-datos {
+	padding-left: 30px;
+	width: 100%;
+}
+
+.error-404 .error-cont .error-cont-datos h3, .error-500 .error-cont .error-cont-datos h3, .error-403 .error-cont .error-cont-datos h3 {
+	font-family: 'nexa_blackregular';
+	font-size: 4em;
+	font-weight: bold;
+}
+
+.error-404 .error-cont .error-cont-datos h3, .error-404 .error-cont .error-cont-datos p, .error-500 .error-cont .error-cont-datos h3, .error-500 .error-cont .error-cont-datos p {
+	color: #FFF;
+}
+
+.error-404 .error-cont .error-cont-datos a.error-cont-a, .error-500 .error-cont .error-cont-datos a.error-cont-a {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: .8em;
+    text-transform: uppercase;
+}
+
+footer a {
+    color: #6C6C6C;
+    font-size: .8em;
+    padding: 4px 0;
+}
+
+a {
+    color: blue;
+    font-family: 'nexaReg';
+    font-size: 16px;
+    font-weight: 400;
+    text-decoration: none;
+    -ms-transition: all 0.3s ease-in;
+    -moz-transition: all 0.3s ease-in;
+    -webkit-transition: all 0.3s ease-in;
+    transition: all 0.3s ease-in;
+}
+
+.footer-fixed {
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    z-index: 11;
+}
+
+footer {
+    background-color: rgba(0, 0, 0, 0.7);
+    position: relative;
+    text-align: center;
+}

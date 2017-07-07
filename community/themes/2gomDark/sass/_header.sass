@@ -1,0 +1,173 @@
+/*!
+	-----------------------------------------------------------------------------
+	
+	3.0 - Header
+
+	-----------------------------------------------------------------------------
+	*/
+
+
+/* Header User */
+.header-user
+	background-color: rgba($black,.7)
+	left: 0
+	padding: 7px 0
+	position: fixed
+	right: 0
+	top: 0
+	z-index: 1000
+	// logo
+	.logo
+		color: $white
+		text-align: left
+		a
+			color: $white
+			&:hover
+				color: rgba($white,.6)
+		h1,
+		span
+			display: inline-block
+			vertical-align: middle
+		h1
+			font-size: .9em
+			font-weight: 100
+			text-transform: uppercase
+		span
+			// background-color: $white
+			background-position: 50%
+			background-repeat: no-repeat
+			background-size: cover
+			+border-radius(50%)
+			color: $black
+			height: 40px
+			margin-right: 10px
+			width: 40px
+	// user
+	.user
+		color: $white
+		text-align: right
+		// p,
+		// .dropdown,
+		// span,
+		// a
+		// 	display: inline-block
+		// 	vertical-align: middle
+		// p
+		// 	font-size: 1.1em
+		// 	font-weight: 100
+		// 	text-transform: uppercase
+		// span
+		// 	// background-color: $white
+		// 	background-position: 50%
+		// 	background-repeat: no-repeat
+		// 	background-size: cover
+		// 	+border-radius(50%)
+		// 	color: $black
+		// 	height: 40px
+		// 	margin-left: 10px
+		// 	width: 40px
+		// a
+		// 	color: $white
+		// 	margin-left: 8px
+		// 	i
+		// 		font-size: 1.4em
+		// // dropdown
+		// .dropdown
+		// 	// background-color: rgba($black,.6)
+		// 	&:hover
+		// 		background-color: rgba($black,.4)
+		// 	.dropdown-toggle
+		// 		// background-color: red
+		// 		cursor: pointer
+		// 	.dropdown-menu
+		// 		padding: 0
+		// 		li
+		// 			a
+		// 				color: $text-base
+		// 				display: block
+		// 				margin-left: 0
+		// 				padding: 8px 14px
+		// 			&:first-child
+		// 				a
+		// 					&:hover
+		// 						+border-radius(4px 4px 0 0)
+		// 			&:last-child
+		// 				a
+		// 					&:hover
+		// 						+border-radius(0 0 4px 4px)
+		// User Flip
+		.pago-seleccion-user,
+		.pago-seleccion-producto
+			padding-left: 20px
+			padding-right: 20px
+		.pago-seleccion-user
+			// background-color: rgba($yellow,.3)
+			color: $white
+			padding: 0
+			position: relative
+			text-align: right
+			z-index: 99
+			p,
+			span,
+			.pago-seleccion-user-flip,
+			.pago-seleccion-user-logout
+				// background-color: rgba(green,.3)
+				display: inline-block
+				vertical-align: middle
+			p
+				font-size: .9em
+				font-weight: 300
+				margin-right: 4px
+				text-transform: uppercase
+			span
+				background-color: $white
+				background-position: 50%
+				background-repeat: no-repeat
+				background-size: cover
+				+border-radius(50%)
+				color: $black
+				height: 40px
+				// margin-left: 10px
+				width: 40px
+			.pago-seleccion-user-logout
+				background-color: $black
+				+border-radius(50%)
+				color: $white
+				font-size: 1.6em
+				height: 40px
+				line-height: 44px
+				text-align: center
+				width: 40px
+				&:hover
+					color: $white
+
+
+/* Header Error */
+.header-error
+	// background-color: rgba($black,.7)
+	left: 0
+	padding: 50px 0 10px
+	position: fixed
+	right: 0
+	top: 0
+	z-index: 1000
+	// logo
+	.logo
+		color: $white
+		text-align: left
+		a
+			// background-color: $yellow
+			color: $white
+			display: block
+			height: 46px
+			width: 290px
+			&:hover
+				color: rgba($white,.6)
+			span
+				// background-color: $red
+				background-position: 50%
+				background-repeat: no-repeat
+				background-size: 100%
+				display: block
+				height: 46px
+				width: 290px

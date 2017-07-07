@@ -1,0 +1,5 @@
+@CHARSET "UTF-8";
+
+#toast-container .toast{
+	opacity: 1 !important;
+}

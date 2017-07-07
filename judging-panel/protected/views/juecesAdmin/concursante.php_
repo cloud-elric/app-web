@@ -1,0 +1,48 @@
+
+<?php 
+				$hasFeedBack = "dgom-ui-competitors-category-no-feedback";
+// 				$p =$competidor->id_product; 
+// 				if($p==2 || $p==4 || $p==6){
+// 					$hasFeedBack ="";
+// 				}
+				$numPics = WrkPics::model()->findAll(array("condition"=>"b_status=2 AND ID=:idUsuario AND id_contest=1", "params"=>array(":idUsuario"=>$data->id_usuario)));
+			?>
+				<div class="row row-line">
+					<div class="col-md-1 text-center">
+						<div class="dgom-ui-competitors-wrap-line-foto">
+						<?php if(empty($data->txt_image_url)){?>
+										<img src="<?php echo Yii::app()->params["pathBaseProfiles"] ?>images/users.jpg" alt="">
+										<?php }else if($data->b_login_social_network){?>
+										<img src="<?=$data->txt_image_url?>" alt="">
+										<?php }else{?>
+										<img src="<?=Yii::app()->params["pathBaseProfiles"] ."images/profiles/".$data->txt_usuario_number."/".$data->txt_image_url?>" alt="">
+										<?php }?>
+							
+						</div>
+					</div>
+					<div class="col-md-8">
+						<h4 class="dgom-ui-competitors-wrap-line-nombre">
+							<?=$data->txt_nombre.' '.$data->txt_apellido_paterno?>
+						</h4>
+						<p class="dgom-ui-competitors-wrap-line-correo">
+							<i class="fa fa-envelope-o" aria-hidden="true"></i> <?=$data->txt_correo?>
+						</p>
+						<?php echo CHtml::link(
+			count($numPics).' ENTRIES', array("viewPhotosCompetitor", "t"=>$data->txt_usuario_number), array("class"=>"no-text-decoration"));
+						
+						foreach($numPics as $pic){
+							
+							echo CHtml::image(Yii::app()->params["pathImage"]. $data->txt_usuario_number . "/small_" . $pic->txt_file_name);
+						}
+						
+						?>
+						
+						
+					</div>
+					<div class="col-md-3 text-right">
+					<?=CHtml::checkBox("competitors[]", "", array("class"=>"competidor_check", "value"=>$data->txt_usuario_number))?>
+					</div>
+				</div>
+
+
+

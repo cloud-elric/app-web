@@ -1,0 +1,69 @@
+// 
+// 
+//	-----------------------------------------------------------------------------
+// 
+//	0.3 - Mixins
+//			# Border Radius
+//			# Box Shadow
+//			# Media Queries
+//			# Transición
+// 
+//	-----------------------------------------------------------------------------
+//
+
+
+//	========================
+//	0.3 - Mixins
+//	========================
+
+//
+// Border Radius
+//
+=border-radius($radio)
+	-webkit-border-radius: $radio
+	-moz-border-radius: $radio
+	-ms-border-radius: $radio
+	border-radius: $radio
+
+// 
+// Box Shadow
+//
+=box-shadow($shadow)
+	-webkit-box-shadow: $shadow
+	-moz-box-shadow: $shadow
+	box-shadow: $shadow
+
+//
+// Media Queries
+//
+=respond-to($media)
+	@if $media == lg
+		@media (min-width: $screen-md + 1)
+			@content
+	@else if $media == md
+		@media (min-width: $screen-sm) and (max-width: $screen-md)
+			@content
+	@else if $media == sm
+		@media (min-width: $screen-xs + 1) and (max-width: $screen-sm - 1)
+			@content
+	@else if $media == xs
+		@media screen and (max-width: $screen-xs)
+			@content
+	@else if $media == sx
+		@media screen and (max-width: $screen-sx)
+			@content
+
+//
+// Transición
+//
+=transition($delay)
+	-ms-transition: $delay
+	-moz-transition: $delay
+	-webkit-transition: $delay
+	transition: $delay
+
+// Transform Rotate
+=transform-rotate($rotate)
+	-ms-transform: rotate($rotate) // IE 9
+	-webkit-transform: rotate($rotate) // Chrome, Safari, Opera
+	transform: rotate($rotate)
