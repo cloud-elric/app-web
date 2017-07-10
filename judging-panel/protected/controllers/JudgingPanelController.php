@@ -932,6 +932,22 @@ AND id_pic NOT IN (SELECT id_pic FROM 2gom_con_calificaciones_desempate WHERE id
 		), "css" );
 		
 		$categorias = Categoiries::model ()->findAll ( 'id_contest='.$concurso->id_contest );
+		foreach ( $categorias as $categoria ) {
+			$calificadas = Yii::app()->db->createCommand()
+			->from('2gom_view_calificacion_final CF')
+			->leftJoin('2gom_con_calificaciones_finalistas CFF', 'CFF.id_pic = CF.id_pic')
+			->where('CF.id_category = :idCategory AND CF.b_status = 2 AND CF.b_calificada = 1 AND CFF.id_juez =:idJuez', array(':idJuez'=>$idJuez, ':idCategory'=>$categoria->id_category))
+			->queryAll();
+			$isCalificadas = 0;
+			if(count($calificadas)==0){
+				$isCalificadas++;
+			}
+		}
+
+		if($isCalificadas==0){
+			$this->redirect(array('feedbackDashBoard', 't'=>$t));
+		}
+
 		$this->render ( 'finalists', array (
 				"categorias" => $categorias ,
 				't'=>$t,

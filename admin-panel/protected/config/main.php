@@ -68,6 +68,7 @@ return array(
 				'adminPanel/finalists/<t:\w+>'=>'juecesAdmin/finalists',
 				'adminPanel/mentions/<t:\w+>'=>'juecesAdmin/menciones',
 				'adminPanel/categoryConflicts/<t:\w+>'=>'juecesAdmin/conflicts',
+				'adminPanel/finalistsTop/<t:\w+>'=>'juecesAdmin/finalistsTop',
 				'<controller:\w+>/<action:\w+>/<t:\w+>'=>'<controller>/<action>',
 				
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',

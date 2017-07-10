@@ -502,8 +502,6 @@ class UsrUsuariosController extends Controller {
 		) );
 
 		}else{
-
-			$calificacionesResultantes = $calificacionesJueces;
 			// Calificaciones por rubro
 		$calificacionRubro = ViewCalificacionByRubro::model ()->findAll ( array (
 				"condition" => "id_pic=:idPic",
@@ -1651,16 +1649,22 @@ class UsrUsuariosController extends Controller {
 
 		$this->tokenContest = $concurso->txt_token;
 
-		$concursoCalificado = ViewPorcentajeJuez::model ()->find ( array (
+		/*$concursoCalificado = ViewPorcentajeJuez::model ()->find ( array (
 				"condition" => "id_contest=:idConcurso AND num_total<100",
 				"params" => array (
 						":idConcurso" => $concurso->id_contest 
 				) 
-		) );
+		) );*/
 
-		$isConcursoCalificado = true;
-		if($concursoCalificado){
-			$isConcursoCalificado = false;
+		$concursoCalificado = Yii::app()->db->createCommand()
+  			->from('2gom_con_calificaciones_finalistas CF')
+			->join('2gom_view_calificacion_final CFF', 'CFF.id_pic = CF.id_pic')
+			->where('CFF.id_category = :idCategory', array(':idCategory'=>$categoria->id_category))
+			->queryAll();
+
+		$isConcursoCalificado = false;
+		if(count($concursoCalificado) > 0){
+			$isConcursoCalificado = true;
 		}
 
 		if($isConcursoCalificado){
@@ -1696,7 +1700,7 @@ class UsrUsuariosController extends Controller {
 					array(
 						':idCategory'=>$categoria->id_category
 						),
-				'order'=>'num_calificacion DESC, num_calificacion_desempate DESC'		
+				'order'=>'num_calificacion_nueva DESC, num_calificacion_desempate DESC'		
 				
 			));
 		}

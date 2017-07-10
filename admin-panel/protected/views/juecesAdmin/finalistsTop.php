@@ -20,7 +20,6 @@ for($i = 1; $i <= 10; $i ++) {
 			</div>
 		</div>
 	</div>
-
 	<?php if(Yii::app()->user->hasFlash('error')):?>
 	
 	<div class="container container-message">
@@ -34,16 +33,22 @@ for($i = 1; $i <= 10; $i ++) {
 foreach ( $categorias as $categoria ) {
 	$index = 1;
 	
+	$categoriaFinalizada = Yii::app()->db->createCommand()
+		->from('2gom_con_calificaciones_finalistas CF')
+		->join('2gom_view_calificacion_final CFF', 'CFF.id_pic = CF.id_pic')
+		->where('CFF.id_category = :idCategory', array(':idCategory'=>$categoria->id_category))
+		->queryAll();
+
 	
 		$lugares = ViewCalificacionFinal::model ()->findAll ( array (
 			"condition" => "b_status=2  AND id_category=:idCategoria",
 			"params" => array (
 					":idCategoria" => $categoria->id_category 
 			),
-			"order" => "num_calificacion_nueva DESC, num_calificacion_desempate DESC",
+			"order" => "num_calificacion_top DESC, num_calificacion_nueva DESC",
 			'limit'=>20
 	) );
-		
+	
 
 	
 	
@@ -80,6 +85,7 @@ foreach ( $categorias as $categoria ) {
 		}
 		
 		$calificacionAnterior = $lugar->num_calificacion_nueva;
+		if(count($categoriaFinalizada) > 0){
 		?>
 	   
 		<div class="col-md-4 margin-bottom-20">
@@ -102,16 +108,16 @@ foreach ( $categorias as $categoria ) {
 						<?php echo CHtml::link('<i class="icon wb-search " aria-hidden="true"></i>', array("juecesAdmin/consulta", "t"=>$lugar->txt_pic_number))?>
 						<?php # echo CHtml::link("", array("juecesAdmin/evaluador", "id"=>$lugar->id_pic), array("class"=>"icon wb-search icon-middle"))?>
 					</figcaption>
+				
 					
-					<?php 
+					<?php
 					
-						if($lugar->num_calificacion_desempate>0){ ?>
+						if($lugar->num_calificacion_top>0){?>
 							<div class="dgom-ui-col-finalist-desempate">
-								<span><?=$lugar->num_calificacion_desempate;?></span>
-								<i class="fa fa-star" style="color:#f2a654;" aria-hidden="true"></i>
+								<span><?=$lugar->num_calificacion_top;?></span>
+								<i class="fa fa-star" style="color:#62a8ea;" aria-hidden="true"></i>
 							</div>
 						<?php }
-					
 					 ?>
 					
 					<?php if($lugar->b_mencion==1){?>
@@ -122,6 +128,8 @@ foreach ( $categorias as $categoria ) {
 					?>
 
 
+					<?php 
+					if(count($categoriaFinalizada) == 0){?>
 					<div class="progreso">
 							<div class="pie-progress pie-progress-sm"
 								data-plugin="pieProgress" data-barcolor="#75E268"
@@ -131,7 +139,9 @@ foreach ( $categorias as $categoria ) {
 								<div class="pie-progress-number"><?=round($lugar->num_calificacion_nueva)?></div>
 							</div>
 					</div>
-						
+					<?php 
+						}
+					?>	
 
 
 				<div>
@@ -150,6 +160,7 @@ foreach ( $categorias as $categoria ) {
 			</div>
 	
 		<?php
+		}
 		$index ++;
 		//}
 	}
