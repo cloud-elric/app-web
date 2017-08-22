@@ -12,12 +12,12 @@
 			$c = new CDbCriteria ();
 			$c->alias = 'CF';
 			$c->condition = 'CF.id_category =:idCategoria  AND CF.b_empate_alterno = 1 AND CF.b_calificada_desempate=0 AND CF.id_pic NOT IN (SELECT id_pic FROM 2gom_con_calificaciones_desempate WHERE id_juez=:idJuez) AND id_contest=:idContest';
-			$c->join = 'INNER JOIN (SELECT DISTINCT F.num_calificacion
+			$c->join = 'INNER JOIN (SELECT DISTINCT F.num_calificacion_nueva
 						FROM 2gom_view_calificacion_final F
 						WHERE F.id_category=:idCategoria
-						order by F.num_calificacion DESC
+						order by F.num_calificacion_nueva DESC
 						LIMIT 10
-						) AS W ON W.num_calificacion = CF.num_calificacion';
+						) AS W ON W.num_calificacion_nueva = CF.num_calificacion_nueva';
 			$c->params = array (
 					':idCategoria' => $categoria->id_category,
 					':idJuez' => $idJuez,

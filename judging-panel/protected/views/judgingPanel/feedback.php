@@ -38,7 +38,7 @@ $this->title = Yii::t ( 'site', 'Photo Judging - Photo Review' );
 
 		<div
 			class="dgom-ui-pintar-photo-wrap-panel2 dgom-ui-pintar-photo-wrap-panel-photo">
-			<img
+			<img 
 				src="<?php echo Yii::app ()->params ['pathBaseImages']."con_".$t.DIRECTORY_SEPARATOR."idu_".$photoCalificar->iD->txt_usuario_number.DIRECTORY_SEPARATOR.$photoCalificar->txt_file_name?>"
 				alt="" id="dgom-ui-pintar-photo-wrap-panel2-image">
 		</div>
@@ -186,6 +186,7 @@ $(document).ready(function(){
 		var imgs = document.getElementById("dgom-ui-pintar-photo-wrap-panel2-image");
 		var width = imgs.clientWidth;
 		var height = imgs.clientHeight;
+		$("#dgom-ui-pintar-photo-wrap-panel2-image").css("height", "100%");
 		if(width >= height){
 			$("#dgom-ui-pintar-photo-wrap-panel2-image").css("width", "100%");
 		}

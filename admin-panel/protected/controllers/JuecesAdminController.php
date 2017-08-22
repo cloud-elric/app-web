@@ -136,7 +136,9 @@ class JuecesAdminController extends Controller {
 
 								'test',
 
-								'downloadImage'
+								'downloadImage',
+								'config',
+								'cambiarConfig'
 
 						),
 
@@ -1300,17 +1302,17 @@ class JuecesAdminController extends Controller {
 
 		->from('2gom_view_calificacion_final CF')
 
-		->join('(SELECT DISTINCT F.num_calificacion
+		->join('(SELECT DISTINCT F.num_calificacion_nueva
 
 						FROM 2gom_view_calificacion_final F
 
-						order by F.num_calificacion DESC
+						order by F.num_calificacion_nueva DESC
 
 						LIMIT 10
 
-						) AS W', 'W.num_calificacion = CF.num_calificacion')
+						) AS W', 'W.num_calificacion_nueva = CF.num_calificacion_nueva')
 
-		->where('id_contest ="'.$concurso->id_contest.'" AND b_empate=1 AND b_calificada_desempate=0')
+		->where('id_contest ="'.$concurso->id_contest.'" AND b_empate_alterno=1 AND b_calificada_desempate=0')
 
 		->queryAll();
 
@@ -1386,7 +1388,7 @@ class JuecesAdminController extends Controller {
 
 		$criteria = new CDbCriteria ();
 
-		$criteria->condition = "(b_empate = 0 OR b_calificada_desempate=1)";
+		$criteria->condition = "(b_empate_alterno = 0 OR b_calificada_desempate=1)";
 
 		
 
@@ -1394,7 +1396,7 @@ class JuecesAdminController extends Controller {
 
 	
 
-		$categoria = ViewCalificacionFinal::model ()->find ( $criteria );
+		//$categoria = ViewCalificacionFinal::model ()->find ( $criteria );
 
 		
 
@@ -1456,17 +1458,17 @@ class JuecesAdminController extends Controller {
 
 		->from('2gom_view_calificacion_final CF')
 
-		->join('(SELECT DISTINCT F.num_calificacion
+		->join('(SELECT DISTINCT F.num_calificacion_nueva
 
 						FROM 2gom_view_calificacion_final F
 
-						order by F.num_calificacion DESC
+						order by F.num_calificacion_nueva DESC
 
 						LIMIT 10
 
-						) AS W', 'W.num_calificacion = CF.num_calificacion')
+						) AS W', 'W.num_calificacion_nueva = CF.num_calificacion_nueva')
 
-		->where('id_contest ="'.$concurso->id_contest.'" AND b_empate=1 AND b_calificada_desempate=0')
+		->where('id_contest ="'.$concurso->id_contest.'" AND b_empate_alterno=1 AND b_calificada_desempate=0')
 
 		->queryAll();
 
@@ -1542,7 +1544,7 @@ class JuecesAdminController extends Controller {
 
 		$criteria = new CDbCriteria ();
 
-		$criteria->condition = "(b_empate = 0 OR b_calificada_desempate=1)";
+		$criteria->condition = "(b_empate_alterno = 0 OR b_calificada_desempate=1)";
 
 		
 
@@ -1717,98 +1719,104 @@ class JuecesAdminController extends Controller {
 
 		// Foto a calificar
 
-		$photo = $this->searchPic ( $t );
+		// Foto a calificar
+		$photo = ViewCalificacionFinal::model()->find(array('condition'=>'txt_pic_number=:token', 'params'=>array(':token'=>$t)));
 
 		
-
-		// Calificaciones por rubro
-
-		$calificacionRubro = ViewCalificacionByRubro::model ()->findAll ( array (
-
-				"condition" => "id_pic=:idPic",
-
-				"params" => array (
-
-						":idPic" => $photo->id_pic 
-
-				),
-
-				'order'=>'id_rubro'
-
-		) );
-
-		
-
-		$criteria = new CDbCriteria ();
-
+$criteria = new CDbCriteria ();
 		$criteria->condition = "id_pic=:idPic";
-
 		$criteria->params = array (
-
-				":idPic" => $photo->id_pic 
-
+				":idPic" => $photo->id_pic
 		);
-
 		$criteria->group = "id_juez, id_pic";
-
 		
-
 		// Busca si el dueño de la fotografía compro con feedback
-
 		$hasFeedback = ViewUsuarioPicsProductos::model ()->find ( array (
-
 				'condition' => 'id_pic=:idPic AND num_addons>0',
-
 				'params' => array (
-
 						':idPic' => $id
-
 				)
-
 		) );
+		$calificacionesJueces = WrkPicsCalificaciones::model ()->findAll ( array (
+				"condition" => "id_pic=:idPic",
+				"params" => array (
+						":idPic" => $photo->id_pic
+				),
+				'order'=>'id_juez, id_rubro'
+		) );
+		$feedBacks = array();
+		if(!empty($hasFeedback)){
+			$feedBacks = WrkPicsCalificaciones::model ()->findAll ( $criteria );
+		}
+		
+		
+		$calificacionMaxima = 0;
+		$calificacionMinima = 0;
 
+		$calificacionesResultantes=[];
+		$removerAlto = true;
+		$removerBajo = true;
+
+		if($photo->b_calificada==1){
+			$calificacionPorJuez = ViewCalificaciones::model()->findAll(array('condition'=>'id_pic=:idPic', 'params'=>array(':idPic'=>$photo->id_pic)));
+
+			$calificacionesArray = [];
+			foreach($calificacionPorJuez as $calificacionJuez){
+				$calificacionesArray[$calificacionJuez->id_juez] = $calificacionJuez->num_calificacion_nueva;
+			}
+			
+			if(count($calificacionesJueces) > 0){
+
+				$maxs = array_keys($calificacionesArray, max($calificacionesArray));
+				$mins = array_keys($calificacionesArray, min($calificacionesArray));
+
+				foreach($calificacionesJueces as $calificacionJuez){
+					if($calificacionJuez->id_juez == $maxs[0] || $calificacionJuez->id_juez == $mins[0]){
+						$calificacionJuez->calificacionNovalida = true;
+						 
+					}else{
+						$calificacionJuez->calificacionNovalida = false;
+					}
+
+					$calificacionesResultantes[] = $calificacionJuez;
+				}
+
+			}
+
+		//$rubros = CatCalificacionesRubros::model()->findAll(array('condition'=>'id_contest =:idContest', 'params'=>array(':idContest'=>$concurso->id_contest)));	
+
+			// Calificaciones por rubro
 		
 
-		$feedBacks = array();
-
-		if(!empty($hasFeedback)){
-
-			$feedBacks = WrkPicsCalificaciones::model ()->findAll ( $criteria );
-
+		}else{
+			// Calificaciones por rubro
+		
 		}
 
-		
-
-		
-
-		
-
-		$calificacionesJueces = WrkPicsCalificaciones::model ()->findAll ( array (
-
+		$calificacionRubro = ViewCalificacionByRubro::model ()->findAll ( array (
 				"condition" => "id_pic=:idPic",
-
 				"params" => array (
-
-						":idPic" => $photo->id_pic 
-
+						":idPic" => $photo->id_pic
 				),
-
-				'order'=>'id_juez, id_rubro'
-
+				'order'=>'id_rubro'
 		) );
-
 		
-
+		$calificacionesJueces = WrkPicsCalificaciones::model ()->findAll ( array (
+				"condition" => "id_pic=:idPic",
+				"params" => array (
+						":idPic" => $photo->id_pic
+				),
+				'order'=>'id_juez, id_rubro'
+		) );
+		
 		$this->render ( 'consulta', array (
-
 				"photo" => $photo,
-
 				"calificacionRubro" => $calificacionRubro,
-
 				"feedBacks" => $feedBacks,
-
-				"calificacionesJueces" => $calificacionesJueces 
-
+				
+				"calificacionesJueces" => $calificacionesResultantes,
+				"calificacionMaxima"=> $calificacionMaxima,
+				"calificacionMinima"=>$calificacionMinima
 		) );
 
 	}
@@ -1902,6 +1910,76 @@ class JuecesAdminController extends Controller {
 		) );
 
 	}
+
+	public function actionCambiarConfig($t=null, $s=null){
+
+		$concurso = $this->getContestByToken($t);
+
+		$concurso->id_status = $s;
+
+		$concurso->save();
+	}
+
+	public function actionConfig($t=null){
+
+		$this->layout = "column4";
+	$this->tokenContest = $t;
+		$concurso = $this->getContestByToken($t);
+
+		$cargarScripts = new CargarScripts ();
+
+		$cargarScripts->getScripts ( array (
+
+				"gridstack",
+
+				"panelPortlets",
+
+				"c_asPieProgress",
+
+				"c_pie_progress",
+
+				"c_nstSlider",
+
+				"c_icheck",
+
+				
+
+				"c_geek" 
+
+		), "css" );
+
+		$cargarScripts->getScripts ( array (
+
+				"lodash",
+
+				"jqueryUi",
+
+				"jsGridstack",
+
+				"panel",
+
+				"js2gridstack",
+
+				"j_jquery_placeholder_components",
+
+				"j_jquery_asPieProgress",
+
+				"j_aspieprogress",
+
+				"j_pie_progress",
+
+				"j_nstSlider",
+
+				"j_icheck_min",
+
+				
+
+				"j_icheck" 
+
+		), "js" );
+
+	$this->render("config", array("concurso"=>$concurso));
+}
 
 	
 
@@ -2670,8 +2748,6 @@ class JuecesAdminController extends Controller {
 		unlink ( "temporal/" . $file );
 
 	}
-
-	
 
 	
 

@@ -197,7 +197,6 @@ overflow:auto;
 </style>
 <?php
 	$suma = 0;
-
 	if($photo->b_calificada==0){
 		foreach ( $calificacionRubro as $rubro ) {
 			
@@ -208,8 +207,7 @@ overflow:auto;
 			$suma = number_format ($photo->num_calificacion_nueva, 0 );
 		}else{
 			$suma = number_format ($photo->num_calificacion,0 );
-		}	
-	}
+		}
 	?>
 
 <!-- Btn Back -->
@@ -221,7 +219,7 @@ overflow:auto;
 	Full-size
 </a>
  -->
-<!-- Consulta Wrapper -->
+<!-- Consulta Wrapper s-->
 <div class="dgom-ui-consulta-wrapper">
 	<div class="dgom-ui-consulta-wrapper-contend dgom-ui-impresion-contenedor">
 
@@ -237,7 +235,6 @@ overflow:auto;
 				<div class="dgom-ui-consulta-wrapper-contend-foto">
 					<!-- FOTO -->
 					<img src="<?php echo Yii::app ()->params ['pathBaseImages'].'con_'.$this->tokenContest."/idu_".$photo->txt_usuario_number."/medium_".$photo->txt_file_name?>" alt="">
-					
 					<!-- Total Score -->
 					<div class="progreso dgom-ui-consulta-wrapper-contend-progreso">
 						<!-- <p>Total Score</p> -->
@@ -276,11 +273,12 @@ overflow:auto;
 				</div>
 
 
-				<!--<div class="row dgom-ui-consulta-wrapper-contend-foto-row">
+				<div class="row dgom-ui-consulta-wrapper-contend-foto-row">
 					<?php
 					$suma = 0;
 					foreach ( $calificacionRubro as $rubro ) {
 						?>
+							<!-- col-md-3 grid grid3 -->
 							<div class="col-md-3 grid grid3 dgom-ui-consulta-wrapper-contend-foto-row-col">
 								<h5><?php echo $rubro->txt_nombre_rubro?></h5>
 								<p><?=number_format($rubro->num_calificacion_actual,1)?></p>
@@ -289,7 +287,7 @@ overflow:auto;
 						$suma += number_format ( $rubro->num_calificacion_actual, 1 );
 					}
 					?>
-				</div>-->
+				</div>
 
 				<!-- .dgom-ui-consulta-wrapper-contend-foto-toogle -->
 				<div class="dgom-ui-consulta-wrapper-contend-foto-toogle">

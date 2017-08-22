@@ -419,9 +419,7 @@ class UsrUsuariosController extends Controller {
 		), "css" );
 		
 		// Foto a calificar
-		//$photo = $this->searchPic ( $t );
-
-		$photo = ViewCalificacionFinal::model()->find(array('condition'=>'txt_pic_number=:token', 'params'=>array(':token'=>$t)));
+		$photo = $this->searchPic ( $t );
 		
 		$concurso = $this->searchConcurso($photo->id_contest);
 		$this->tokenContest = $concurso->txt_token;
@@ -441,13 +439,6 @@ class UsrUsuariosController extends Controller {
 						':idPic' => $id
 				)
 		) );
-		
-		$feedBacks = array();
-		if(!empty($hasFeedback)){
-			$feedBacks = WrkPicsCalificaciones::model ()->findAll ( $criteria );
-		}
-		
-		
 		$calificacionesJueces = WrkPicsCalificaciones::model ()->findAll ( array (
 				"condition" => "id_pic=:idPic",
 				"params" => array (
@@ -455,8 +446,12 @@ class UsrUsuariosController extends Controller {
 				),
 				'order'=>'id_juez, id_rubro'
 		) );
-
-
+		$feedBacks = array();
+		if(!empty($hasFeedback)){
+			$feedBacks = WrkPicsCalificaciones::model ()->findAll ( $criteria );
+		}
+		
+		
 		$calificacionMaxima = 0;
 		$calificacionMinima = 0;
 
@@ -493,16 +488,13 @@ class UsrUsuariosController extends Controller {
 		//$rubros = CatCalificacionesRubros::model()->findAll(array('condition'=>'id_contest =:idContest', 'params'=>array(':idContest'=>$concurso->id_contest)));	
 
 			// Calificaciones por rubro
-		$calificacionRubro = ViewCalificacionByRubro::model ()->findAll ( array (
-				"condition" => "id_pic=:idPic",
-				"params" => array (
-						":idPic" => $photo->id_pic
-				),
-				'order'=>'id_rubro'
-		) );
+		
 
 		}else{
 			// Calificaciones por rubro
+		
+		}
+
 		$calificacionRubro = ViewCalificacionByRubro::model ()->findAll ( array (
 				"condition" => "id_pic=:idPic",
 				"params" => array (
@@ -510,20 +502,20 @@ class UsrUsuariosController extends Controller {
 				),
 				'order'=>'id_rubro'
 		) );
-		}
-
-
-
-
+		
+		$calificacionesJueces = WrkPicsCalificaciones::model ()->findAll ( array (
+				"condition" => "id_pic=:idPic",
+				"params" => array (
+						":idPic" => $photo->id_pic
+				),
+				'order'=>'id_juez, id_rubro'
+		) );
 		
 		$this->render ( 'consulta', array (
 				"photo" => $photo,
 				"calificacionRubro" => $calificacionRubro,
 				"feedBacks" => $feedBacks,
-				"calificacionesJueces" => $calificacionesResultantes,
-				"calificacionMaxima"=> $calificacionMaxima,
-				"calificacionMinima"=>$calificacionMinima
-				
+				"calificacionesJueces" => $calificacionesJueces
 		) );
 	}
 	
@@ -1688,7 +1680,7 @@ class UsrUsuariosController extends Controller {
 					array(
 						':idCategory'=>$categoria->id_category
 						),
-				'order'=>'num_calificacion_nueva DESC, num_calificacion_desempate DESC'
+				'order'=>'num_calificacion DESC, num_calificacion_desempate DESC'
 				
 			));
 			}
@@ -1700,7 +1692,7 @@ class UsrUsuariosController extends Controller {
 					array(
 						':idCategory'=>$categoria->id_category
 						),
-				'order'=>'num_calificacion_nueva DESC, num_calificacion_desempate DESC'		
+				'order'=>'num_calificacion DESC, num_calificacion_desempate DESC'		
 				
 			));
 		}

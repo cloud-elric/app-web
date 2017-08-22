@@ -85,11 +85,11 @@ $this->title = Yii::t ( 'site', 'titleJudgePanel' );
 						<?= CHtml::link("<h2 class='dgom-ui-dashboard-box-heading'>".$categoria->txt_name."</h2>", array("feedbackReview", "idCategoria"=>$categoria->txt_token_category, "t"=>$t))?>
 					<?php }?>	
 						<h3 class="dgom-ui-dashboard-box-number">
-							<?=$numCalificadas?> / <?=$numPorCalificar?>
+							<?=$numCalificadas?> / <?=$numTotalPics?>
 						</h3>
 
 						<div class="progress progress-lg">
-							<div class="progress-bar progress-bar-primary progress-bar-striped" style="width: <?=$porcentaje?>%;" role="progressbar"><?=$porcentaje?>%</div>
+							<div class="progress-bar progress-bar-primary progress-bar-striped" style="width: <?=$porcentaje?>%;" role="progressbar"><?= number_format($porcentaje, 0)?>%</div>
 						</div>
 
 						<h6 class="dgom-ui-dashboard-box-progress-txt"><?=Yii::t('site','progress')?></h6>

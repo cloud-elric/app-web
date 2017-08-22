@@ -94,8 +94,17 @@ class JudgingPanelController extends Controller {
 	 * @param string $t        	
 	 */
 	public function existeConcurso($t = null) {
-		// Obtenemos el concurso a cual prentende ingresar el juez
-		$concurso = ConContests::buscarPorToken ( $t );
+		
+		if(Yii::app ()->user->getState ($t."concurso")){
+			$concurso = Yii::app ()->user->getState ($t."concurso");
+			//Yii::app ()->user->setState ( "concursante", $usuario);
+		}else{
+			// Obtenemos el concurso a cual prentende ingresar el juez
+			$concurso = ConContests::buscarPorToken ( $t );
+
+			Yii::app ()->user->setState ( $t."concurso", $concurso);
+		}
+		
 		
 		// Si no existe el concurso lo mandamos a la pantalla con error 404
 		if (empty ( $concurso )) {
@@ -891,16 +900,41 @@ class JudgingPanelController extends Controller {
 		$idJuez = Yii::app ()->user->juezLogueado->id_juez;
 			$concurso = $this->existeConcurso ( $t );
 		
-		$existEmpate = Yii::app()->db->createCommand()
-		->from('2gom_view_calificacion_final')
-		->where('b_empate_alterno=1 and id_contest = '.$concurso->id_contest.'
-AND id_pic NOT IN (SELECT id_pic FROM 2gom_con_calificaciones_desempate WHERE id_juez=:idJuez)', array(':idJuez'=>$idJuez))
-		->queryAll();
-		
-		if(count($existEmpate)==0){
-			
-			$this->redirect(array('finalistas', 't'=>$t));
+// 		$existEmpate = Yii::app()->db->createCommand()
+// 		->from('2gom_view_calificacion_final')
+// 		->where('b_empate_alterno=1 and id_contest = '.$concurso->id_contest.'
+// AND id_pic NOT IN (SELECT id_pic FROM 2gom_con_calificaciones_desempate WHERE id_juez=:idJuez)', array(':idJuez'=>$idJuez))
 
+		// ->queryAll();
+		
+		if(true){
+
+			// $jueces = JueRelJuecesContests::model()->findAll('id_contests='.$concurso->id_contest);
+			// $juecesCompletaronDesempate = true;
+			// foreach($jueces as $juez){
+
+			// 	if($juecesCompletaronDesempate){
+			// 		$calificoJuez = Yii::app()->db->createCommand()
+			// 		->from('2gom_view_calificacion_final')
+			// 		->where('b_empate=1 and id_contest = '.$concurso->id_contest.'
+			// 			AND id_pic NOT IN (SELECT id_pic FROM 2gom_con_calificaciones_desempate WHERE id_juez=:idJuez)', array(':idJuez'=>$juez->id_juez))
+					
+			// 		->queryAll();
+
+			// 		if(count($calificoJuez)>0){
+			// 			$juecesCompletaronDesempate = false;
+			// 		}
+			// 	}
+			// }
+
+			if(true){
+
+				$this->redirect(array('finalistas', 't'=>$t));
+			}else{
+				$this->layout = "column5";
+				$this->render('categoriaFinalizada');
+				exit;
+			}
 			//$this->redirect(array('feedbackDashBoard', 't'=>$t));
 			return;
 		}
@@ -1260,7 +1294,7 @@ AND id_pic NOT IN (SELECT id_pic FROM 2gom_con_calificaciones_desempate WHERE id
 		
 		$c = new CDbCriteria ();
 		$c->alias = 'CF';
-		$c->condition = 'CF.id_category =:idCategoria  AND CF.b_empate_alterno = 1 AND CF.b_calificada_desempate=0 AND CF.id_pic NOT IN (SELECT id_pic FROM 2gom_con_calificaciones_desempate WHERE id_juez=:idJuez) and id_contest=:idContest';
+		$c->condition = 'CF.id_category =:idCategoria  AND CF.b_empate_alterno= 1 AND CF.b_calificada_desempate=0 AND CF.id_pic NOT IN (SELECT id_pic FROM 2gom_con_calificaciones_desempate WHERE id_juez=:idJuez) and id_contest=:idContest';
 		$c->join = 'INNER JOIN (SELECT DISTINCT F.num_calificacion_nueva
 						FROM 2gom_view_calificacion_final F
 						WHERE F.id_category=:idCategoria
@@ -1289,7 +1323,6 @@ AND id_pic NOT IN (SELECT id_pic FROM 2gom_con_calificaciones_desempate WHERE id
 		->where ( 'F.id_category=:idCategoria', array (':idCategoria' => $id 
 		) )->order('F.num_calificacion_nueva DESC')->limit(10)->queryAll ();
 		
-
 		$this->render ( 'breakerRoundByCategory', array (
 				"lugares" => $lugares,
 				"categoria" => $categoria,
@@ -1326,12 +1359,12 @@ AND id_pic NOT IN (SELECT id_pic FROM 2gom_con_calificaciones_desempate WHERE id
 						) 
 				) );
 
-				print_r($isPicCalificada);
+				
 				if (empty ( $isPicCalificada )) {
 					if ($model->validate ()) {
 						$calificacionesGuardar [] = $model;
 					} else {
-						
+						print_r($model->getErrors());
 						$validar = false;
 						$calificacionesGuardar = array ();
 						break;

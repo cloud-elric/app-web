@@ -1,0 +1,1 @@
+[21-Aug-2017 17:39:21 UTC] PHP Fatal error:  Allowed memory size of 33554432 bytes exhausted (tried to allocate 15360 bytes) in /home/gomcommx/public_html/www2geeksonemonkey.com/demos/global-judging/mexico/community/protected/controllers/UsrUsuariosController.php on line 937

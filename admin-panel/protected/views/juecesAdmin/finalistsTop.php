@@ -45,7 +45,7 @@ foreach ( $categorias as $categoria ) {
 			"params" => array (
 					":idCategoria" => $categoria->id_category 
 			),
-			"order" => "num_calificacion_top DESC, num_calificacion_nueva DESC",
+			"order" => "num_calificacion_top DESC, num_calificacion_nueva DESC, num_calificacion_desempate DESC",
 			'limit'=>20
 	) );
 	
@@ -85,7 +85,7 @@ foreach ( $categorias as $categoria ) {
 		}
 		
 		$calificacionAnterior = $lugar->num_calificacion_nueva;
-		if(count($categoriaFinalizada) > 0){
+		
 		?>
 	   
 		<div class="col-md-4 margin-bottom-20">
@@ -160,7 +160,7 @@ foreach ( $categorias as $categoria ) {
 			</div>
 	
 		<?php
-		}
+		
 		$index ++;
 		//}
 	}

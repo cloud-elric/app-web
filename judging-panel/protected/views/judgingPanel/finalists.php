@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="row padding-horizontal-50">
 		<div class="col-md-12">
-			<h2 class="title-section-breaker-round">Finalists Round</h2>
+			<h2 class="title-section-breaker-round">Top Ten Round</h2>
 		</div>
 	</div>
 	<div class="row padding-vertical-30 padding-horizontal-50">

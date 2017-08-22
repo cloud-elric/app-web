@@ -76,6 +76,12 @@
 
                 		</li>
 
+						<li class="site-menu-item">
+
+							<?= CHtml::link('<i class="icon i iconm ion-gear-b" aria-hidden="true"></i><span class="site-menu-title">Config</span>',array('adminPanel/config/'.$tokenContest), array("class"=>"animsition-link")); ?>
+
+                		</li>
+
 				</ul>
 
 			</div>

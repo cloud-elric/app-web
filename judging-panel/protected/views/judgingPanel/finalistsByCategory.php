@@ -169,7 +169,7 @@ $index = 0;
 Yii::app ()->clientScript->registerScript ( 'breakerRoundByCategory', '
 $(document).ready(function(){
 		
-		
+		 
 		$(".popup-gallery").magnificPopup({
 	    delegate: "a",
 	    type: "image",

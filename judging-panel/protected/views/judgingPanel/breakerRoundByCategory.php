@@ -128,8 +128,9 @@ foreach ( $countCalificaciones as $key => $empatadas ) {
 				
 				foreach($lugaresCategoria as $llave=>$value){
 					
-					if($value['num_calificacion_nueva']==intval($lugar->num_calificacion_nueva)){
+					if(intval($value['num_calificacion_nueva'])==intval($lugar->num_calificacion_nueva)){
 						$lugarPintarNumero = $llave;
+						
 					}
 				}
 				

@@ -58,7 +58,7 @@
 
 								if($imagen->id_contest >= 4){
 
-									if($isConcursoFinalizado && $imagen->b_empate_alterno){
+									if($isConcursoFinalizado && $imagen->b_empate){
 
 								?>
 
@@ -74,7 +74,7 @@
 
 							}else{
 
-								if($imagen->b_empate_alterno){
+								if($imagen->b_empate){
 
 								?>
 
@@ -98,7 +98,7 @@
 
 										if($imagen->b_calificada == 1){
 
-											$calificacion = round($imagen->num_calificacion_nueva);
+											$calificacion = round($imagen->num_calificacion);
 
 										}else{
 

@@ -1,8 +1,16 @@
 <?php
 	$suma = 0;
-	foreach ( $calificacionRubro as $rubro ) {
-		
-		$suma += number_format ( $rubro->num_calificacion_actual, 1 );
+	if($photo->b_calificada==0){
+		foreach ( $calificacionRubro as $rubro ) {
+			
+			$suma += number_format ( $rubro->num_calificacion_actual, 1 );
+		}
+	}else{
+		if($photo->id_contest >= 4){
+			$suma = number_format ($photo->num_calificacion_nueva, 0 );
+		}else{
+			$suma = number_format ($photo->num_calificacion,0 );
+		}
 	}
 	?>
 
@@ -30,7 +38,7 @@
 				<!-- Imagen -->
 				<div class="dgom-ui-consulta-wrapper-contend-foto">
 					<!-- FOTO -->
-					<img src="<?php echo Yii::app ()->params ['pathBaseImages'].'con_'.$this->tokenContest."/idu_".$photo->iD->txt_usuario_number."/medium_".$photo->txt_file_name?>" alt="">
+					<img src="<?php echo Yii::app ()->params ['pathBaseImages'].'con_'.$this->tokenContest."/idu_".$photo->txt_usuario_number."/medium_".$photo->txt_file_name?>" alt="">
 					
 					<!-- Total Score -->
 					<div class="progreso dgom-ui-consulta-wrapper-contend-progreso">
@@ -80,19 +88,7 @@
 
 
 				<div class="row dgom-ui-consulta-wrapper-contend-foto-row">
-					<?php
-					$suma = 0;
-					foreach ( $calificacionRubro as $rubro ) {
-						?>
-							<!-- col-md-3 grid grid3 -->
-							<div class="col-md-3 grid grid3 dgom-ui-consulta-wrapper-contend-foto-row-col">
-								<h5><?php echo $rubro->txt_nombre_rubro?></h5>
-								<p><?=number_format($rubro->num_calificacion_actual,1)?></p>
-							</div>
-					<?php
-						$suma += number_format ( $rubro->num_calificacion_actual, 1 );
-					}
-					?>
+					
 				</div>
 
 				<!-- .dgom-ui-consulta-wrapper-contend-foto-toogle -->
@@ -128,7 +124,7 @@
 									<!-- col-md-3 grid grid3 -->
 									<div class="col-md-3 grid grid3 dgom-ui-consulta-wrapper-contend-foto-row-col">
 										<?=$calificacion->idRubro->txt_nombre?>
-										<p><?=number_format($calificacion->num_calificacion)?></p>
+										<p <?=$calificacion->calificacionNovalida? 'style="opacity: 0.2"': ''?>><?=number_format($calificacion->num_calificacion)?></p>
 									</div>	
 								</div>
 							<?php
@@ -368,7 +364,7 @@ $(document).ready(function(){
 	$(".dgom-js-download-image").on("click", function(e){
 		e.preventDefault();
 		
-		window.location.replace("'.Yii::app()->request->baseUrl.'/juecesAdmin/downloadImage?picture='.$photo->txt_file_name.'&token='.$this->tokenContest."&u=".$photo->iD->txt_usuario_number.'");
+		window.location.replace("'.Yii::app()->request->baseUrl.'/juecesAdmin/downloadImage?picture='.$photo->txt_file_name.'&token='.$this->tokenContest."&u=".$photo->txt_usuario_number.'");
 	});
 
 

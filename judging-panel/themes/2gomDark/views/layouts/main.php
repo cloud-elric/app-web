@@ -436,7 +436,7 @@
     <script src="<?php echo Yii::app()->theme->baseUrl ?>/assets/examples/js/uikit/icon.js"></script>
     <script src="<?php echo Yii::app()->theme->baseUrl ?>/assets/js/spin.min.js"></script>
     <script src="<?php echo Yii::app()->theme->baseUrl ?>/assets/js/ladda.min.js"></script>
-
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
 	$(document).ready(function(){
 		 $('body').animsition();

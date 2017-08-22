@@ -14,6 +14,7 @@
  */
 class ViewCalificaciones extends CActiveRecord
 {
+	public $calificacionNovalida;
 
 	/**
 	 * @return string the associated database table name

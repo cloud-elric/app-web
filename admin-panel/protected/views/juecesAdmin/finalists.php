@@ -128,7 +128,7 @@ foreach ( $categorias as $categoria ) {
 								data-size="100" data-barsize="4"
 								data-goal="<?=$lugar->num_calificacion_nueva?>"
 								aria-valuenow="<?=$lugar->num_calificacion_nueva?>" role="progressbar">
-								<div class="pie-progress-number"><?=round($lugar->num_calificacion_nueva)?></div>
+								<div class="pie-progress-number"><?=intval($lugar->num_calificacion_nueva)?></div>
 							</div>
 					</div>
 						

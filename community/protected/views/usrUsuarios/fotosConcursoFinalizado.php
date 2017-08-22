@@ -56,7 +56,9 @@ $this->pageTitle = Yii::t('general', 'subirFotosTitle');
 			<div class="mis-fotos container">
 			<div class="container-botones">
 				<?php 
+				$categorias = [];
 					foreach($categorias as $categoria){
+						
 				 ?>
 				<a target="_blank" class="btn btn-comite" href="<?=Yii::app()->request->baseUrl?>/usrUsuarios/verFotosCategoria?token=<?=$categoria->txt_token_category?>" ><?=$categoria->txt_name_es?></a>
 				<?php }?>
