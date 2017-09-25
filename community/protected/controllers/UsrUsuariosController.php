@@ -752,8 +752,8 @@ class UsrUsuariosController extends Controller {
 	/**
 	 * Action para agregar fotos del usuario
 	 */
-	public function actionGuardarFotosCompetencia() {
-		$idConcurso = 5;//Yii::app ()->user->concurso;
+	public function actionGuardarFotosCompetencia($token = null) {
+		//Yii::app ()->user->concurso;
 		$idUsuario = Yii::app ()->user->concursante->id_usuario;
 		$tokenUsuario = Yii::app ()->user->concursante->txt_usuario_number;
 		$respuesta = array ();
@@ -763,7 +763,10 @@ class UsrUsuariosController extends Controller {
 		}
 		
 		// Recupera el concurso
-		$concurso = $this->searchConcurso ( $idConcurso );
+		
+		$concurso = $this->validarToken ( $token );
+		$idConcurso = $concurso->id_contest;
+		
 		
 		$isUsuarioInscrito = ConRelUsersContest::isUsuarioInscrito ( $idUsuario, $idConcurso );
 		try {
@@ -1494,6 +1497,22 @@ class UsrUsuariosController extends Controller {
 			$cupon = new PayCupons ();
 		}
 		$message = '';
+
+		$precioRetroalimentacion = 100;
+		 
+		if (isset ( $_POST ['retroalimentacion'] ) && $_POST ['retroalimentacion'] ) {
+			if(!$oc->num_addons){
+				$oc->num_sub_total += $precioRetroalimentacion ;
+				$oc->num_addons = 1;
+				
+				$oc->save ();
+			}
+		}else if ($oc->num_addons ){
+			$oc->num_sub_total -= $precioRetroalimentacion ;
+			$oc->num_addons = 0;
+			$oc->save ();
+		}	
+
 		if (isset ( $_POST ['PayCupons'] )) {
 			
 			$cupon->attributes = $_POST ['PayCupons'];
@@ -1513,7 +1532,10 @@ class UsrUsuariosController extends Controller {
 
 				$cupon = new PayCupons ();
 
-				if(empty ( $cuponBaseDatos )){
+				
+				if(empty($cupon->txt_identificador_unico)){
+					$message = '';
+				}else if(empty ( $cuponBaseDatos )) {
 					$message = 'Cupón no válido';
 				}else{
 					$message = 'Cupón ya ha sido utilizado';
@@ -1561,7 +1583,8 @@ class UsrUsuariosController extends Controller {
 				'cupon' => $cupon,
 				'message' => $message,
 				'tiposPagos' => $tiposPagos,
-				'concurso' => $concurso 
+				'concurso' => $concurso,
+				'precioRetroalimentacion' =>$precioRetroalimentacion
 		) );
 		
 		return;

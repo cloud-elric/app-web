@@ -106,11 +106,46 @@ $this->pageTitle = Yii::t ( 'general', 'checkoutTitle' );
 												<p class="prodcuto"><?=$oc->txt_description?></p>
 											</div>
 											<div class="col-md-3 text-right">
-												<p class="prodcuto-total">$ <?=$oc->num_sub_total==0?'0':$oc->num_sub_total . " " . $concurso->txt_moneda?></p>
+												<p class="prodcuto-total">
+												<?php 
+												if ($oc->num_addons ){
+												?>
+								$ <?=$oc->num_sub_total==0?'0':($oc->num_sub_total - $precioRetroalimentacion). " " . $concurso->txt_moneda?>
+												<?php 
+												}else{
+												?>
+								$ <?=$oc->num_sub_total==0?'0':$oc->num_sub_total . " " . $concurso->txt_moneda?>
+												<?php 
+												}
+												?>
+
+												
+												</p>
 											</div>
 										</div>
 
+																			
+
 <?php
+if ($oc->num_addons) {
+
+
+?>
+
+<div class="row">
+											<div class="col-md-9">
+												<p class="prodcuto">Retroalimentación</p>
+											</div>
+											<div class="col-md-3 text-right">
+												<p class="prodcuto-total prodcuto-cupon">$ +<?=$precioRetroalimentacion?> <?=$concurso->txt_moneda ?></p>
+											</div>
+										</div>
+
+
+
+<?php
+}
+
 
 if (! empty ( $cupon->txt_identificador_unico )) {
 	// echo $cupon->txt_identificador_unico . '<br>';
@@ -154,6 +189,30 @@ $form = $this->beginWidget ( 'CActiveForm', array (
 		'enableAjaxValidation' => false 
 ) );
 ?>
+
+	<h2 class="selecciona-inscripcion">Agregar retroalimentación</h2>	
+
+	<div class="sec-producto-resumen">
+
+										<div class="row">
+											<div class="col-md-9">
+												<p class="prodcuto">
+												<input id="retroalimentacion" <?= ($oc->num_addons)?'checked':'' ?> type="checkbox" name="retroalimentacion" value="1"/>
+													<label for="retroalimentacion">
+													Agregar retroalimentación
+													
+													</label></p>
+											</div>
+											<div class="col-md-3 text-right">
+												<p class="prodcuto-total">$ + <?=$precioRetroalimentacion. " ".$concurso->txt_moneda ?></p>
+											</div>
+										</div>
+
+																			
+
+
+</div>									
+
 	<h2 class="selecciona-inscripcion"><?=Yii::t('checkout', 'headerCupon')?></h2>
 									<div class="row">
 										<div class="col-md-4">
@@ -249,7 +308,7 @@ $form = $this->beginWidget ( 'CActiveForm', array (
 		?></span>
 											</div>
 											<div class="tax-precio">
- 			<?=Yii::t('checkout', 'impuesto')?> <span>$ <?=$oc->num_total?($oc->num_sub_total * (0.16)) . " " . $concurso->txt_moneda:'0'?></span>
+ 			<?=Yii::t('checkout', 'impuesto')?> <span>$ <?=$oc->num_total?($subTotal * (0.16)) . " " . $concurso->txt_moneda:'0'?></span>
 											</div>
 											<div class="total-precio"><?=Yii::t('checkout', 'total')?> <span>$<?=$oc->num_total . " " . $concurso->txt_moneda ?></span>
 											</div>
@@ -288,6 +347,10 @@ $form = $this->beginWidget ( 'CActiveForm', array (
 
 						<script>
 $(document).ready(function(){
+
+	$("#retroalimentacion").on("change", function(e){
+		$('#form-pago').submit();
+	});
 
 	$('#addCupon').on('click', function(e){
 		e.preventDefault();

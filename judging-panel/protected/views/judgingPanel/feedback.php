@@ -506,7 +506,7 @@ $(document).ready(function(){
 	        } else {
 				 textoProvicional.text(event.results[i][0].transcript);
 		
-				 textAreaView.val(textoOriginal.text()+textoProvicional.text());
+				 textAreaView.val(textoOriginal.text()+textoProvicional.text()+"\n");
 
 	              //i.e. interim...
 	            console.log("interim results: " + event.results[i][0].transcript);  //You can use these results to give the user near real time experience.

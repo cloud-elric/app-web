@@ -312,7 +312,7 @@ class JudgingPanelController extends Controller
 		
 		// Cargamos categorias
 		$criteriaCategorias = new CDbCriteria();
-		$criteriaCategorias->condition = 'id_contest=1 AND id_category NOT IN (:idPic)';
+		$criteriaCategorias->condition = 'id_contest='.$concurso->id_contest.' AND id_category NOT IN (:idPic)';
 		$criteriaCategorias->params = array(
 			':idPic' => $photoCalificar->id_category_original
 		);
@@ -331,7 +331,7 @@ class JudgingPanelController extends Controller
 		if (isset($_POST["WrkPics"])) {
 
 			$wrkPicsCalificaciones = WrkPicsCalificaciones::model()->findAll(array(
-				'condition' => 'id_contest=1 AND id_juez=:idJuez AND id_pic=:idPic',
+				'condition' => 'id_contest='.$concurso->id_contest.' AND id_juez=:idJuez AND id_pic=:idPic',
 				'params' => array(
 					':idJuez' => $idJuez,
 					':idPic' => $photoCalificar->id_pic
@@ -717,7 +717,7 @@ class JudgingPanelController extends Controller
 			$retro = nl2br($_POST["txt_retro"]);
 
 			$calificaciones = WrkPicsCalificaciones::model()->findAll(array(
-				'condition' => 'id_pic=:idPic AND id_juez=:idJuez AND id_contest=1',
+				'condition' => 'id_pic=:idPic AND id_juez=:idJuez AND id_contest='.$concurso->id_contest,
 				'params' => array(
 					':idPic' => $photoCalificar->id_pic,
 					':idJuez' => $idJuez
@@ -854,7 +854,7 @@ class JudgingPanelController extends Controller
 
 		$idJuez = Yii::app()->user->juezLogueado->id_juez;
 		$calificaciones = WrkPicsCalificaciones::model()->findAll(array(
-			'condition' => 'id_pic=:idPic AND id_juez=:idJuez AND id_contest=1',
+			'condition' => 'id_pic=:idPic AND id_juez=:idJuez AND id_contest='.$concurso->id_contest,
 			'params' => array(
 				':idPic' => $photoCalificar->id_pic,
 				':idJuez' => $idJuez
@@ -925,67 +925,125 @@ class JudgingPanelController extends Controller
 	/**
 	 * action para Tie breaker round
 	 */
-	public function actionTieBreakerRound($t = '')
-	{
-		$this->layout = "column5";
-		$this->title = "Dashboard3";
-
-		$idJuez = Yii::app()->user->juezLogueado->id_juez;
-		$concurso = $this->existeConcurso($t);
-		
-// 		$existEmpate = Yii::app()->db->createCommand()
-// 		->from('2gom_view_calificacion_final')
-// 		->where('b_empate_alterno=1 and id_contest = '.$concurso->id_contest.'
-// AND id_pic NOT IN (SELECT id_pic FROM 2gom_con_calificaciones_desempate WHERE id_juez=:idJuez)', array(':idJuez'=>$idJuez))
-
-		// ->queryAll();
-
-		if (true) {
-
-			// $jueces = JueRelJuecesContests::model()->findAll('id_contests='.$concurso->id_contest);
-			// $juecesCompletaronDesempate = true;
-			// foreach($jueces as $juez){
-
-			// 	if($juecesCompletaronDesempate){
-			// 		$calificoJuez = Yii::app()->db->createCommand()
-			// 		->from('2gom_view_calificacion_final')
-			// 		->where('b_empate=1 and id_contest = '.$concurso->id_contest.'
-			// 			AND id_pic NOT IN (SELECT id_pic FROM 2gom_con_calificaciones_desempate WHERE id_juez=:idJuez)', array(':idJuez'=>$juez->id_juez))
-					
-			// 		->queryAll();
-
-			// 		if(count($calificoJuez)>0){
-			// 			$juecesCompletaronDesempate = false;
-			// 		}
-			// 	}
-			// }
-
-			if (true) {
-
-				$this->redirect(array('finalistas', 't' => $t));
-			}
-			else {
-				$this->layout = "column5";
-				$this->render('categoriaFinalizada');
-				exit;
-			}
-			//$this->redirect(array('feedbackDashBoard', 't'=>$t));
-			return;
-		}
-
-		$cargarScripts = new CargarScripts();
-		$cargarScripts->getScripts(array(
-			"c_geek"
-		), "css");
-
-		$categorias = Categoiries::model()->findAll('id_contest=' . $concurso->id_contest);
-		$this->render('tieBreakerPanel', array(
-			"categorias" => $categorias,
-			't' => $t,
-			'concurso' => $concurso
-
-		));
-	}
+	 public function actionTieBreakerRound($t = '')
+	 {
+		 $this->layout = "column5";
+		 $this->title = "Dashboard3";
+ 
+		 $idJuez = Yii::app()->user->juezLogueado->id_juez;
+		 $concurso = $this->existeConcurso($t);
+ 
+		 $juezTerminoDesempate = EntJuezTerminoDesempate::model()->find('id_contest=' . $concurso->id_contest." AND id_juez=".$idJuez);
+ 
+		 if($juezTerminoDesempate){
+ 
+			 $juecesConcurso = JueRelJuecesContests::model()->findAll('id_contests=' . $concurso->id_contest);
+			 $idJueces = [];	
+			 foreach($juecesConcurso as $juez){
+				 $idJueces[] = $juez->id_juez;
+			 }
+ 
+			 $criteria = new CDbCriteria();
+			 $criteria->condition = 'id_contest='.$concurso->id_contest; 
+			 $criteria->addInCondition('id_juez', $idJueces);
+			 
+ 
+			 $juecesTerminaronDesempate = EntJuezTerminoDesempate::model()->findAll($criteria);
+ 
+			 if(count($juecesTerminaronDesempate)==count($juecesConcurso)){
+				 $this->redirect(array('finalistas', 't' => $t));
+				 exit;
+			 }
+ 
+			 $this->layout = "column5";
+			 $this->render('categoriaFinalizada');
+			 
+			exit();
+		 }
+ 
+		 $categoriasJuez = ConRelJuecesCategories::model()->findAll('id_contest=' . $concurso->id_contest. " AND id_juez=".$idJuez);
+		 $idCategoriaJuez = [];
+		 foreach($categoriasJuez as $categoriaJuez){
+			 
+			 $idCategoriaJuez[] = $categoriaJuez->id_category;
+		 }
+			 $criteria = new CDbCriteria();
+			 $criteria->condition = 'id_contest='.$concurso->id_contest; 
+			 $criteria->addInCondition('id_category', $idCategoriaJuez);
+		 
+		 $categorias = Categoiries::model()->findAll($criteria);
+		 
+ 
+		 $cargarScripts = new CargarScripts();
+		 $cargarScripts->getScripts(array(
+			 "c_geek"
+		 ), "css");
+ 
+		 $categoriasEmpatadas = array();
+		 $fotosTerminadas = true;
+		  foreach($categorias as $categoria){
+		 // 	if(Yii::app()->user->getState($categoria->txt_token . "categoria")){
+ 
+		 // 	}else{
+			$c = new CDbCriteria ();
+			$c->alias = 'CF';
+			$c->condition = 'CF.id_category =:idCategoria  AND CF.b_empate_alterno = 1 AND CF.b_calificada_desempate=0 AND CF.id_pic NOT IN (SELECT id_pic FROM 2gom_con_calificaciones_desempate WHERE id_juez=:idJuez) AND id_contest=:idContest';
+			$c->join = 'INNER JOIN (SELECT DISTINCT F.num_calificacion_nueva
+						FROM 2gom_view_calificacion_final F
+						WHERE F.id_category=:idCategoria
+						order by F.num_calificacion_nueva DESC
+						LIMIT 10
+						) AS W ON W.num_calificacion_nueva = CF.num_calificacion_nueva';
+			$c->params = array (
+					':idCategoria' => $categoria->id_category,
+					':idJuez' => $idJuez,
+					':idContest' =>$concurso->id_contest
+			);
+				 
+				  $fotosEmpatadas = ViewCalificacionFinal::model ()->findAll ( $c);
+				 
+				  $numFotos = count ( $fotosEmpatadas );
+				  if ($numFotos > 0) {
+					  $categoria->num_fotos_empatadas = $numFotos;
+					 $categoriasEmpatadas[] = $categoria ;
+					 $fotosTerminadas = false;
+					  
+				  }
+			  }
+		  
+		 if($fotosTerminadas){
+ 
+			 $juezFinalizoEmpate = new EntJuezTerminoDesempate();
+			 $juezFinalizoEmpate->id_juez = $idJuez;
+			 $juezFinalizoEmpate->b_termino = 1;
+			 $juezFinalizoEmpate->id_contest = $concurso->id_contest;
+			 $juezFinalizoEmpate->save();
+			 $this->layout = "column5";
+			  $this->render('categoriaFinalizada');
+			  
+			 exit();
+		 }	 
+		 
+ 
+ 
+		 if(Yii::app()->user->getState($t . "empateFinalizado")){
+			 $this->redirect(array('finalistas', 't' => $t));
+		 }else{
+ 
+ 
+			 // $this->layout = "column5";
+			 // $this->render('categoriaFinalizada');
+			 // exit;
+			 $this->render('tieBreakerPanel', array(
+				 "categorias" => $categoriasEmpatadas,
+				 't' => $t,
+				 'concurso' => $concurso
+	 
+			 ));
+		 }
+ 
+ 
+	 }
 
 	public function actionFinalistas($t = '')
 	{

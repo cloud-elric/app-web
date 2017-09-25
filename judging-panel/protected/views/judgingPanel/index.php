@@ -3,6 +3,12 @@ $this->title = Yii::t ( 'site', 'titleJudgePanel' );
 ?>
 <div class="container">
     <div class="row padding-50">
+	<div class="row">
+		<div class="col-md-12">
+			<?= CHtml::link("Dictar", array("feedbackDashBoard", "t"=>$t), array("class"=>"btn btn-primary"))?>
+		</div>
+	</div>
+	<br>
 		<?php
 		foreach ( $avance as $av ) :
 		if($av->num_porcentaje>=100){

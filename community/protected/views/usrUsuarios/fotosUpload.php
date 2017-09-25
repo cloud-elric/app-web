@@ -324,7 +324,7 @@ function uploadImage(forma, input, jav) {
 	var bar = $(identificador + ' .progress-bar');
 	var percent = $(identificador + ' .progress-num');
 	var status = $(identificador + ' #status');
-	var url = base + 'usrUsuarios/guardarFotosCompetencia';
+	var url = base + 'usrUsuarios/guardarFotosCompetencia?token=<?=$con->txt_token?>';
 	var button = $(identificador + " .verificarButtonAjax");
 	var filename = input.val();
 	$(identificador + " .progress-close").addClass("cancelarUpload");

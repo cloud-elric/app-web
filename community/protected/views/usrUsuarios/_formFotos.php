@@ -25,7 +25,7 @@
 			'id' => 'wrk-pic-form_' . $pic->txt_pic_number,
 			'htmlOptions' => array (
 					'enctype' => 'multipart/form-data',
-					'action' => 'usrUsuarios/guardarFotosCompetencia',
+					'action' => 'usrUsuarios/guardarFotosCompetencia?token='.$concurso->txt_token,
 					'class' => 'form-wrk-pic '.$classForm 
 			),
 			'enableAjaxValidation' => true,
